@@ -24,7 +24,7 @@ export class EstadoCivilService {
     }
 
     /**
-     * Servicio que retorna un registro de la tabla Estado Civil según ID
+     * Servicio que retorna un registro de la tabla ESTADO-CIVIL según ID
      * @param id 
      * @returns 
      */
@@ -39,7 +39,7 @@ export class EstadoCivilService {
     }
 
     /**
-     * Servicio que elimina un registro de la tabla SEXO según id
+     * Servicio que elimina un registro de la tabla ESTADO-CIVIL según id
      * se utiliza remove y no delete porque solo el primero activa triggers
      * @param id 
      * @returns 
@@ -51,13 +51,14 @@ export class EstadoCivilService {
     }
 
     /**
-     * Servicio que crea un nuevo registro de la tabla SEXO
+     * Servicio que crea un nuevo registro de la tabla ESTADO-CIVIL
      * @param data 
      * @returns 
      */
     async createOne(data: CreateEstadoCivilDto){
         const existe = await this.estadoCivilRepository.findOne({estado_civil: data.estado_civil});
         if(existe) throw new BadRequestException("El registro que intenta crear ya existe");
+        data.estado_civil="soltero";
         const nuevo = this.estadoCivilRepository.create(data);
         return await this.estadoCivilRepository.save(nuevo)
     }
