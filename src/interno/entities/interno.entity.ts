@@ -696,7 +696,7 @@ export class  Interno {
     })
     abogado: string;
 
-    @CreateDateColumn()
+   @CreateDateColumn()
    fecha_alta: Date;
 
    @UpdateDateColumn()

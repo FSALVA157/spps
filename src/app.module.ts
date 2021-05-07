@@ -33,6 +33,7 @@ import { JuzgadoModule } from './juzgado/juzgado.module';
 import { TipoDefensorModule } from './tipo-defensor/tipo-defensor.module';
 import { ProvinciaModule } from './provincia/provincia.module';
 import { DepartamentoModule } from './departamento/departamento.module';
+import { UsuarioModule } from './usuario/usuario.module';
 
 
 @Module({
@@ -88,7 +89,8 @@ import { DepartamentoModule } from './departamento/departamento.module';
     JuzgadoModule,
     TipoDefensorModule,
     ProvinciaModule,
-    DepartamentoModule
+    DepartamentoModule,
+    UsuarioModule
   ],
   controllers: [AppController],
   providers: [AppService],
