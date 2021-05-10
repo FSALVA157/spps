@@ -1,4 +1,6 @@
-import{ Length, IsString, IsNumber, isEmail, IsEmail} from 'class-validator';
+import{ Length, IsString, IsNumber, isEmail, IsEmail, IsOptional, IsEnum} from 'class-validator';
+import { EnumToString } from 'src/helpers/enumToString';
+import { UsuarioRole } from '../enums/usuario-role-enums';
 
 
 export class CreateUsuarioDto {
@@ -25,8 +27,15 @@ export class CreateUsuarioDto {
     apellido: string;
 
     @IsString()
-    @Length(2,200,{message:'La Foto debe tener entre $constraint1 y $constraint2 caracteres'})
+    @IsOptional()
     foto: string;
+
+    
+    @IsOptional()
+    @IsEnum(UsuarioRole,{
+        message: `No ha introducido un valor valido(${EnumToString(UsuarioRole)})`
+    })
+    role: UsuarioRole;
 
     
     

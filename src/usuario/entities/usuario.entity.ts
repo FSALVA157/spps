@@ -1,4 +1,7 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { UsuarioRole } from '../enums/usuario-role-enums';
+import { hash } from 'bcrypt';
+
 
 @Entity()
 export class Usuario {
@@ -16,8 +19,8 @@ export class Usuario {
 
     @Column({
         type: "varchar",
-        length: 50,
-        nullable: false
+        nullable: false,
+        select:false
     })
     clave: string;
 
@@ -44,9 +47,17 @@ export class Usuario {
     @Column({
         type: "varchar",
         length: 200,
-        nullable: false
+        nullable: true
     })
     foto: string;
+    
+    @Column({
+        type: "enum",
+        nullable:true,
+        enum: UsuarioRole,
+        default: UsuarioRole.normal
+    })
+    role: UsuarioRole;
 
     @CreateDateColumn()
     fecha_alta: Date;
@@ -56,4 +67,14 @@ export class Usuario {
 
     @DeleteDateColumn()
     fecha_baja: Date;
+
+    @BeforeInsert()
+    @BeforeUpdate()
+    async hashPassword(){
+        if(!this.clave){
+            return;
+        }
+        this.clave = await hash(this.clave,10);
+    }
+    
 }
