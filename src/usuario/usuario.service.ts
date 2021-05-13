@@ -58,4 +58,9 @@ export class UsuarioService {
         const nuevo = this.usuarioRepository.create(data);
         return await this.usuarioRepository.save(nuevo)
     }
+
+    //metodo que busca por email
+    async getUserByEmail(email: string){
+        return await this.usuarioRepository.findOne({correo: email});
+    }
 }

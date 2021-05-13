@@ -35,15 +35,15 @@ async function bootstrap() {
 
   //configuración de la documentación
   const config = new DocumentBuilder()
-  .setTitle('Servidor de la Dirección de Cuerpo Penitenciario')
-  .setDescription('Descripción de la API Cuerpo')
+  .setTitle('Servidor del Servicio Penitenciario de Salta')
+  .setDescription('Descripción de la API S.P.P.S.')
   .setVersion('1.0')
-  .addTag('cuerpo')
+  .addTag('spps')
   .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-
+  app.enableCors();
   await app.listen(3000);
   const logger = new Logger();
   logger.log(`corriendo el servidor ${await app.getUrl()}`);

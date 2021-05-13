@@ -10,6 +10,9 @@ import { UsuarioController } from './usuario.controller';
             Usuario
         ])
       ],
+      exports: [
+        UsuarioService
+      ],
     providers: [UsuarioService],
     controllers: [UsuarioController]
 })

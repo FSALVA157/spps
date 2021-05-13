@@ -34,6 +34,7 @@ import { TipoDefensorModule } from './tipo-defensor/tipo-defensor.module';
 import { ProvinciaModule } from './provincia/provincia.module';
 import { DepartamentoModule } from './departamento/departamento.module';
 import { UsuarioModule } from './usuario/usuario.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -90,7 +91,8 @@ import { UsuarioModule } from './usuario/usuario.module';
     TipoDefensorModule,
     ProvinciaModule,
     DepartamentoModule,
-    UsuarioModule
+    UsuarioModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
