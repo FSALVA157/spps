@@ -61,6 +61,10 @@ export class UsuarioService {
 
     //metodo que busca por email
     async getUserByEmail(email: string){
-        return await this.usuarioRepository.findOne({correo: email});
+        return await this.usuarioRepository
+                .createQueryBuilder('user')
+                .where({correo: email})
+                .addSelect('user.clave')
+                .getOne()
     }
 }

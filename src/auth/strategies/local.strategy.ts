@@ -5,16 +5,19 @@ import { AuthService } from "../auth.service";
 
 
 @Injectable()
-export class LocalStrategy extends PassportStrategy(Strategy) {
+export class LocalStrategy extends PassportStrategy(Strategy,'local') {
   constructor(private authService: AuthService) {
-    super();
+    super({
+      usernameField: "email",
+      passwordField: "clave"
+    });
   }
 
-  async validate(username: string, password: string): Promise<any> {
+  async validate(email: string, clave: string){
     let user=null;
-    user = await this.authService.validateUser(username, password);
+    user = await this.authService.validateUser(email, clave);
     if (!user) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException("El usuario o contraseña no coinciden");
     }
     return user;
   }

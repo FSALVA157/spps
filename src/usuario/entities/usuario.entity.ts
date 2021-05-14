@@ -20,7 +20,7 @@ export class Usuario {
     @Column({
         type: "varchar",
         nullable: false,
-        select:false
+        select: false
     })
     clave: string;
 
