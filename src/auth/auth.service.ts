@@ -9,6 +9,7 @@ export class AuthService {
     ){ }
 
     //metodo para validar el usario
+    //uso de compare desde libreria bcrypt
     async validateUser(email: string, clave: string){
         const usuario = await this.usuarioService.getUserByEmail(email);
         if(usuario && await compare(clave, usuario.clave)){
