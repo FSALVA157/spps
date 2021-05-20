@@ -3,6 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUsuarioDto, EditUsuarioDto } from './dto';
 import { Usuario } from './entities/usuario.entity';
+import * as fs from 'fs-extra';
+import * as path from 'path';
 
 @Injectable()
 export class UsuarioService {
@@ -59,7 +61,7 @@ export class UsuarioService {
         return await this.usuarioRepository.save(nuevo)
     }
 
-    //metodo que busca por email
+    //BUSCAR POR EMAIL
     async getUserByEmail(email: string){
         return await this.usuarioRepository
                 .createQueryBuilder('user')
@@ -67,4 +69,34 @@ export class UsuarioService {
                 .addSelect('user.clave')
                 .getOne()
     }
+    //FIN BUSCAR X EMAIL
+
+    //GUARDAR FOTO EN BASE DE DATOS
+    //guarda el nombre de la foto en el campo foto del usuario
+    async cargarFoto(foto_url: string, id: number){
+        const user = await this.usuarioRepository.findOne({id_usuario: id});
+        if(!user){
+            throw new NotFoundException('No existe el usuario al que intenta asignar la imagen');
+           return; 
+        }    
+        
+        //si ya existe una foto vamos a eliminarla de la carpeta de imagenes
+        //`users-pictures/${user.foto}` es la ruta a la imagen
+        if(user.foto !== null){            
+                fs.unlink(path.resolve(`users-pictures/${user.foto}`)).then().catch(error=>{
+                    console.log(error);
+                    console.log(foto_url);
+                });            
+        }
+
+        //reemplaza la foto actual por la subida
+        let data: EditUsuarioDto = {
+            "foto": foto_url
+        };
+        
+        const resultado = await this.usuarioRepository.update(id, data);
+        if(resultado.affected == 0) throw new NotFoundException('No se ha actualizado el campo de imagen');
+        return resultado;
+    }
+    //FIN GUARDAR FOTO EN BASE DE DATOS
 }

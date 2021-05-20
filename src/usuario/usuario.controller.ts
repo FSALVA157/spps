@@ -1,13 +1,18 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post, Put, Req, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { EditUsuarioDto } from './dto/edit-usuario.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import * as path from 'path';
+import { v4 as uuid } from 'uuid';
+import {Request, Response} from 'express';
 
 @Controller('usuario')
 export class UsuarioController {
 
     constructor(
-        private readonly usuarionService: UsuarioService
+        private readonly usuarioService: UsuarioService
     ){}
 
     /**
@@ -16,7 +21,7 @@ export class UsuarioController {
      */
     @Get()
     async getAll(){
-        return await this.usuarionService.getAll();
+        return await this.usuarioService.getAll();
     }
 
     /**
@@ -29,7 +34,7 @@ export class UsuarioController {
         @Param('id',ParseIntPipe)
         id: number
     ){
-        return await this.usuarionService.getOne(id);
+        return await this.usuarioService.getOne(id);
     }
 
     /**
@@ -42,7 +47,7 @@ export class UsuarioController {
         @Body()
         data: CreateUsuarioDto
     ){
-        return await this.usuarionService.createOne(data);
+        return await this.usuarioService.createOne(data);
     }
 
     /**
@@ -58,7 +63,7 @@ export class UsuarioController {
         @Body()
         data: EditUsuarioDto
     ){
-        return await this.usuarionService.editOne(id, data);
+        return await this.usuarioService.editOne(id, data);
     }
 
     /**
@@ -71,6 +76,50 @@ export class UsuarioController {
         @Param('id', ParseIntPipe)
         id: number
     ){
-        return await this.usuarionService.deleteOne(id);
+        return await this.usuarioService.deleteOne(id);
     }
+
+    //METODO CARGAR IMAGEN
+    @Post('foto')
+    @UseInterceptors(
+         FileInterceptor(
+             'foto_carga',{
+                 storage: diskStorage({
+                     destination: path.join(__dirname,'../../users-pictures'),
+                     filename: (req, file, cb) => {
+                               cb(null, uuid() + path.extname(file.originalname))
+                    },
+                    },
+                 ),
+                 fileFilter: (req, file, cb) => {                    
+                        if(!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)){
+                                         return cb(new HttpException('Formato de archivo inválido (jpg|jpeg|png|gif)', HttpStatus.BAD_REQUEST),false);
+                                        
+                        }
+                           cb(null, true);                                               
+                     }
+             })   
+        )
+    async cargarFoto(
+        @UploadedFile()
+        foto: Express.Multer.File,
+        @Req()
+        req: Request,    
+    ){
+        try {
+            if(req.query.id === null || foto === null){
+                    throw new Error;
+            }
+            const id: number = parseInt(req.query.id.toString());
+            
+            console.log(foto);
+            return await this.usuarioService.cargarFoto(foto.filename, id);
+            
+        } catch (error) {
+
+            throw new BadRequestException(req.query.id +'No olvide adjuntar un archivo imagen y el parámetro id del  usuario!!');
+        }
+    }
+
+    //FIN METODO CARGAR IMAGEN
 }

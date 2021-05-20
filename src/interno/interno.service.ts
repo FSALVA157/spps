@@ -17,7 +17,8 @@ export class InternoService {
      * @returns 
      */
     async getAll(){
-        return await this.internoRepository.find();
+        //const [data, total] = await this.internoRepository.findAndCount();
+        return await this.internoRepository.findAndCount();
     }
 
     /**
