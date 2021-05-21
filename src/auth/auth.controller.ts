@@ -10,8 +10,7 @@ export class AuthController {
             message: "Estos son sus datos"
          }
     }
-    
-    
+        
     @UseGuards(AuthGuard('local'))
     @Post('login')
     async login(@Request() req){

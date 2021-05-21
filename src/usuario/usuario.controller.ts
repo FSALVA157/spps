@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post, Put, Req, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post, Put, Req, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { EditUsuarioDto } from './dto/edit-usuario.dto';
@@ -23,6 +23,30 @@ export class UsuarioController {
     async getAll(){
         return await this.usuarioService.getAll();
     }
+
+    //METODO PARA RETORNAR ARCHIVO IMAGEN DEL USUARIO
+    @Get('foto')
+     getFotos(
+        @Req()
+        req: Request,
+        @Res()
+        res: Response
+     ){        
+        try {
+            if(!req.query.foto_nombre){
+                throw new Error('Debe proporcionar el nombre de la foto del Usuario');
+            }
+            const nombre_foto: string = req.query.foto_nombre.toString();
+            
+            const ruta = this.usuarioService.getFoto(nombre_foto);
+            
+            res.sendFile(ruta);
+                    
+        } catch (error) {
+            throw new BadRequestException(error.message);
+        }
+     }
+    //FIN PARA RETORNAR ARCHIVO POR IMAGEN
 
     /**
      * Petición http que devuelve un registro según id
@@ -82,24 +106,25 @@ export class UsuarioController {
     //METODO CARGAR IMAGEN
     @Post('foto')
     @UseInterceptors(
-         FileInterceptor(
-             'foto_carga',{
-                 storage: diskStorage({
-                     destination: path.join(__dirname,'../../users-pictures'),
-                     filename: (req, file, cb) => {
-                               cb(null, uuid() + path.extname(file.originalname))
+        FileInterceptor(
+            'foto_carga',{
+                storage: diskStorage({
+                    destination: path.join(__dirname,'../../users-pictures'),
+                        filename: (req, file, cb) => {
+                            cb(null, uuid() + path.extname(file.originalname))
+                        },
                     },
-                    },
-                 ),
-                 fileFilter: (req, file, cb) => {                    
-                        if(!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)){
-                                         return cb(new HttpException('Formato de archivo inválido (jpg|jpeg|png|gif)', HttpStatus.BAD_REQUEST),false);
-                                        
-                        }
-                           cb(null, true);                                               
-                     }
-             })   
-        )
+                ),
+                fileFilter: (req, file, cb) => {                    
+                    if(!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)){
+                                        return cb(new HttpException('Formato de archivo inválido (jpg|jpeg|png|gif)', HttpStatus.BAD_REQUEST),false);
+                                    
+                    }
+                        cb(null, true);                                               
+                    }
+            }
+        )   
+    )
     async cargarFoto(
         @UploadedFile()
         foto: Express.Multer.File,
@@ -122,4 +147,6 @@ export class UsuarioController {
     }
 
     //FIN METODO CARGAR IMAGEN
+
+    
 }

@@ -19,6 +19,7 @@ export class LocalStrategy extends PassportStrategy(Strategy,'local') {
     if (!user) {
       throw new UnauthorizedException("El usuario o contraseña no coinciden");
     }
+    console.log(user);
     return user;
   }
 }
