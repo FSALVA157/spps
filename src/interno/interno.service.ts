@@ -21,6 +21,7 @@ export class InternoService {
         return await this.internoRepository.findAndCount();
     }
 
+    
     /**
      * Servicio que retorna un registro de la tabla INTERNO según ID
      * @param id 
@@ -59,5 +60,10 @@ export class InternoService {
         //data.fecha_nacimiento = new Date(2000,3,22);
         const nuevo = this.internoRepository.create(data);
         return await this.internoRepository.save(nuevo)
+    }
+
+    //METODO PLANILLA ANTECEDENTES
+    async getPlanillaAntecedentes(prontuario:number){
+        return await this.internoRepository.findOneOrFail(prontuario);
     }
 }

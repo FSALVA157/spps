@@ -104,7 +104,6 @@ export class UsuarioService {
     getFoto(nombre_foto: string){
         try {
             const ruta = path.resolve(__dirname,`../../users-pictures/${nombre_foto}`);
-            console.log(ruta);
             return ruta;            
             
         } catch (error) {

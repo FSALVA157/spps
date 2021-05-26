@@ -38,7 +38,8 @@ export class  Interno {
 
     @Column({
         type: "int",
-        nullable: false
+        nullable: false,
+        unique: true
     })
     prontuario: number;
 

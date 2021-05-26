@@ -18,6 +18,17 @@ export class InternoController {
         return await this.internoService.getAll();
     }
 
+    //RETORNAR PLANILLA ANTECEDENTES
+    @Get('planilla-antecedentes')
+    async getPlanillaAntecedentes(
+        @Param('prontuario',ParseIntPipe)
+        prontuario: number
+    ){
+        return await this.internoService.getPlanillaAntecedentes(prontuario);
+    }
+    //FIN RETORNAR PLANILLA ANTECEDENTES
+
+
     /**
      * Petición http que devuelve un registro según id
      * @param id 
