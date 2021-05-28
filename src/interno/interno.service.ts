@@ -63,7 +63,12 @@ export class InternoService {
     }
 
     //METODO PLANILLA ANTECEDENTES
-    async getPlanillaAntecedentes(prontuario:number){
-        return await this.internoRepository.findOneOrFail(prontuario);
+    async getPlanillaAntecedentes(in_prontuario:number){
+        let interno: Interno;
+        interno= await this.internoRepository.findOneOrFail({prontuario: in_prontuario});
+        console.log("ineterno", interno);
+        return await this.internoRepository.findOneOrFail({prontuario: in_prontuario});
+
     }
+    //FIN METODO PLANILLA ANTECEDENTES
 }

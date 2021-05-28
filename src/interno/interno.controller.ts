@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Req, Res } from '@nestjs/common';
 import { InternoService } from './interno.service';
 import { CreateInternoDto } from './dto/create-interno.dto';
 import { EditInternoDto } from './dto/edit-interno.dto';
+import {Request, Response} from 'express';
 
 @Controller('interno')
 export class InternoController {
@@ -17,14 +18,21 @@ export class InternoController {
     async getAll(){
         return await this.internoService.getAll();
     }
+    //FIN Petición http que lista todos los registros
 
-    //RETORNAR PLANILLA ANTECEDENTES
+    //PETICION HTTP PARA RETORNAR PLANILLA ANTECEDENTES    
     @Get('planilla-antecedentes')
-    async getPlanillaAntecedentes(
-        @Param('prontuario',ParseIntPipe)
-        prontuario: number
-    ){
-        return await this.internoService.getPlanillaAntecedentes(prontuario);
+    async getPlanillaAntecedentes(@Req() req: Request){  
+        try {
+            if(!req.query.prontuario){
+                throw new Error('Debe proporcionar el prontuario');
+            }
+            const prontuario: number = parseInt(req.query.prontuario.toString());
+            return await this.internoService.getPlanillaAntecedentes(prontuario);
+                    
+        } catch (error) {
+            throw new BadRequestException(error.message);
+        }
     }
     //FIN RETORNAR PLANILLA ANTECEDENTES
 
@@ -41,6 +49,7 @@ export class InternoController {
     ){
         return await this.internoService.getOne(id);
     }
+    //FIN Petición http que devuelve un registro según id
 
     /**
      * Petición http que crea un nuevo registro
@@ -54,6 +63,7 @@ export class InternoController {
     ){
         return await this.internoService.createOne(data);
     }
+    //FIN Petición http que crea un nuevo registro
 
     /**
      * Petición http que edita un registro según id
@@ -70,6 +80,7 @@ export class InternoController {
     ){
         return await this.internoService.editOne(id, data);
     }
+    //FIN Petición http que edita un registro según id
 
     /**
      * Petición http que elimina un registro según id
@@ -83,7 +94,7 @@ export class InternoController {
     ){
         return await this.internoService.deleteOne(id);
     }
-
+    //FIN Petición http que elimina un registro según id
 
 
 }
