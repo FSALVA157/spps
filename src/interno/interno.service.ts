@@ -4,6 +4,8 @@ import { Repository } from 'typeorm';
 import { Interno } from './entities/interno.entity';
 import { EditInternoDto } from './dto/edit-interno.dto';
 import { CreateInternoDto } from './dto/create-interno.dto';
+import { PlanillaAntecedentes } from '../planilla-antecedentes/entities/planilla-antecedentes';
+import { addListener } from 'node:process';
 
 @Injectable()
 export class InternoService {
@@ -64,9 +66,14 @@ export class InternoService {
 
     //METODO PLANILLA ANTECEDENTES
     async getPlanillaAntecedentes(in_prontuario:number){
-        let interno: Interno;
+        let interno: Interno;        
+        let planillaAntecedentes: PlanillaAntecedentes= new PlanillaAntecedentes;
+
         interno= await this.internoRepository.findOneOrFail({prontuario: in_prontuario});
-        console.log("ineterno", interno);
+
+        planillaAntecedentes.apellido_1 = interno.apellido_1;
+        planillaAntecedentes.estado_civil = interno.estado_civil.estado_civil;
+        console.log("interno-planilla", planillaAntecedentes);
         return await this.internoRepository.findOneOrFail({prontuario: in_prontuario});
 
     }

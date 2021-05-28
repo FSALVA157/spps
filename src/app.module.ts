@@ -35,6 +35,8 @@ import { ProvinciaModule } from './provincia/provincia.module';
 import { DepartamentoModule } from './departamento/departamento.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
+import { PlanillaAntecedentesModule } from './planilla-antecedentes/planilla-antecedentes.module';
+
 
 
 @Module({
@@ -92,7 +94,8 @@ import { AuthModule } from './auth/auth.module';
     ProvinciaModule,
     DepartamentoModule,
     UsuarioModule,
-    AuthModule
+    AuthModule,
+    PlanillaAntecedentesModule
   ],
   controllers: [AppController],
   providers: [AppService],
