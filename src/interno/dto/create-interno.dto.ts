@@ -139,6 +139,7 @@ export class CreateInternoDto {
     @IsNumber()
     reingreso_num: number;
 
+    @IsDateString()
     fecha_ingreso: Date; 
 
     @IsString()

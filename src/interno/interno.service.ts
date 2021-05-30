@@ -72,9 +72,50 @@ export class InternoService {
         interno= await this.internoRepository.findOneOrFail({prontuario: in_prontuario});
 
         planillaAntecedentes.apellido_1 = interno.apellido_1;
-        planillaAntecedentes.estado_civil = interno.estado_civil.estado_civil;
+        planillaAntecedentes.apellido_2= interno.apellido_2;
+        planillaAntecedentes.nombre_1 = interno.nombre_1;
+        planillaAntecedentes.nombre_2 = interno.nombre_2;
+        planillaAntecedentes.nombre_3 = interno.nombre_3;
+        planillaAntecedentes.prontuario = interno.prontuario;
+        planillaAntecedentes.dni = interno.dni;
+        planillaAntecedentes.fecha_nacimiento = interno.fecha_nacimiento;
+        planillaAntecedentes.departamento = interno.departamento.departamento;
+        planillaAntecedentes.provincia = interno.departamento.provincia.provincia;
+        planillaAntecedentes.nacionalidad = interno.nacionalidad.nacionalidad;
+        planillaAntecedentes.departamento_nacimiento = interno.departamento_nacimiento.departamento; 
+        planillaAntecedentes.provincia_nacimiento = interno.departamento.provincia.provincia;
+        planillaAntecedentes.unidad = interno.unidad.unidad;
+        planillaAntecedentes.establecimiento_procedencia = interno.establecimiento_procedencia.establecimiento_procedencia;
+        planillaAntecedentes.reingreo = interno.reingreso.reingreso;
+        planillaAntecedentes.reingreso_num = interno.reingreso_num;
+        planillaAntecedentes.fecha_ingreso = interno.fecha_ingreso;
+        planillaAntecedentes.causa_penal = interno.causa_penal;
+        planillaAntecedentes.tipo_condena = interno.tipo_condena.tipo_condena;
+        planillaAntecedentes.expediente_numero = interno.expediente_numero;
+        planillaAntecedentes.prontuario_policial = interno.prontuario_policial;
+        planillaAntecedentes.estado_procesal = interno.estado_procesal.estado_procesal;
+        planillaAntecedentes.tipo_delito = interno.tipo_delito.tipo_delito;
+        planillaAntecedentes.jurisdiccion = interno.jurisdiccion.jurisdiccion;
+        planillaAntecedentes.reincidencia = interno.reincidencia.reincidencia;
+        planillaAntecedentes.juzgado = interno.juzgado.juzgado;
+        planillaAntecedentes.fecha_detencion = interno.fecha_detencion;
+        planillaAntecedentes.juzgado_condena = interno.condena_juzgado.juzgado;
+        planillaAntecedentes.total_anios = interno.total_anios;
+        planillaAntecedentes.total_meses = interno.total_meses;
+        planillaAntecedentes.total_dias = interno.total_dias;
+        planillaAntecedentes.computo = interno.computo;
+        planillaAntecedentes.fecha_cumple = interno.fecha_cumple;
+        planillaAntecedentes.lleva_cumplido = "anios-meses-dias";
+        planillaAntecedentes.falta_cumplir = "anios - meses - dias";
+        planillaAntecedentes.conducta = "conducta";
+        planillaAntecedentes.concepto = "concepto";
+        planillaAntecedentes.periodo = "periodo";
+        planillaAntecedentes.causas_penales_pendientes = "mas causas";
+        planillaAntecedentes.salidas_transitorias = "salidas";
+        planillaAntecedentes.sanciones_disciplinarias = "sanciones";
+        planillaAntecedentes.conmutaciones = "conmutraciones";           
         console.log("interno-planilla", planillaAntecedentes);
-        return await this.internoRepository.findOneOrFail({prontuario: in_prontuario});
+        return planillaAntecedentes;
 
     }
     //FIN METODO PLANILLA ANTECEDENTES
