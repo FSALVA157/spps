@@ -116,7 +116,6 @@ export class InternoService {
         planillaAntecedentes.conmutaciones = "conmutraciones";           
         
         return planillaAntecedentes;
-
     }
     //FIN METODO PLANILLA ANTECEDENTES
 }
