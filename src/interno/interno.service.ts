@@ -59,7 +59,7 @@ export class InternoService {
     async createOne(data: CreateInternoDto){
         const existe = await this.internoRepository.findOne({prontuario: data.prontuario});
         if(existe) throw new BadRequestException("El registro que intenta crear ya existe (prontuario existente)");
-        //data.fecha_nacimiento = new Date(2000,3,22);
+        
         const nuevo = this.internoRepository.create(data);
         return await this.internoRepository.save(nuevo)
     }
@@ -114,7 +114,7 @@ export class InternoService {
         planillaAntecedentes.salidas_transitorias = "salidas";
         planillaAntecedentes.sanciones_disciplinarias = "sanciones";
         planillaAntecedentes.conmutaciones = "conmutraciones";           
-        console.log("interno-planilla", planillaAntecedentes);
+        
         return planillaAntecedentes;
 
     }
