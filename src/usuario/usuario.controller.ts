@@ -42,7 +42,7 @@ export class UsuarioController {
 
     //FIN METODO PARA RETORNAR USUARIOS POR UNIDAD
 
-    //METODO PARA RETORNAR USUARIOS POR UNIDAD
+    //METODO PARA RETORNAR USUARIOS POR UNIDAD DEL ADMINISTRADOR
     @Get('buscar-por-unidad-admin')
     async getUsuariosXUnidadParamEmail(@Req() req: Request){  
         let usuario: Usuario= null;
@@ -66,11 +66,8 @@ export class UsuarioController {
             return await this.usuarioService.getUsersByUnidad(0);
         }     
         
-                    
-       
     }
-
-    //FIN METODO PARA RETORNAR USUARIOS POR UNIDAD
+    //FIN METODO PARA RETORNAR USUARIOS POR UNIDAD DEL ADMINISTRADOR
 
 
     //METODO PARA RETORNAR ARCHIVO IMAGEN DEL USUARIO
