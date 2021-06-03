@@ -64,6 +64,12 @@ export class InternoService {
         return await this.internoRepository.save(nuevo)
     }
 
+    //BUSCAR POR UNIDAD
+    async getInternosByUnidad(id_unidad: number){
+        return await this.internoRepository.find({unidad_id: id_unidad});
+    }
+    //FIN BUSCAR X UNIDAD
+
     //METODO PLANILLA ANTECEDENTES
     async getPlanillaAntecedentes(in_prontuario:number){
         let interno: Interno;        

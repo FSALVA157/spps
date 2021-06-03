@@ -7,6 +7,7 @@ import { diskStorage } from 'multer';
 import * as path from 'path';
 import { v4 as uuid } from 'uuid';
 import {Request, Response} from 'express';
+import { Usuario } from './entities/usuario.entity';
 
 @Controller('usuario')
 export class UsuarioController {
@@ -23,6 +24,54 @@ export class UsuarioController {
     async getAll(){
         return await this.usuarioService.getAll();
     }
+
+    //METODO PARA RETORNAR USUARIOS POR UNIDAD
+    @Get('buscar-por-unidad')
+    async getUsuariosXUnidad(@Req() req: Request){  
+        try {
+            if(!req.query.id_unidad){
+                throw new Error('Debe proporcionar la unidad');
+            }
+            const id_unidad: number = parseInt(req.query.id_unidad.toString());
+            return await this.usuarioService.getUsersByUnidad(id_unidad);
+                    
+        } catch (error) {
+            throw new BadRequestException(error.message);
+        }
+    }
+
+    //FIN METODO PARA RETORNAR USUARIOS POR UNIDAD
+
+    //METODO PARA RETORNAR USUARIOS POR UNIDAD
+    @Get('buscar-por-unidad-admin')
+    async getUsuariosXUnidadParamEmail(@Req() req: Request){  
+        let usuario: Usuario= null;
+        let email: string= "";
+        
+        try {
+            if(!req.query.email){
+                throw new Error('Debe proporcionar el email del usuario');
+            }
+            email = req.query.email.toString();
+            usuario = await this.usuarioService.getUserByEmail(email);
+                    
+        } catch (error) {
+            throw new BadRequestException(error.message);
+        }
+
+        if(usuario){
+            return await this.usuarioService.getUsersByUnidad(usuario.unidad_id);
+        }
+        else{
+            return await this.usuarioService.getUsersByUnidad(0);
+        }     
+        
+                    
+       
+    }
+
+    //FIN METODO PARA RETORNAR USUARIOS POR UNIDAD
+
 
     //METODO PARA RETORNAR ARCHIVO IMAGEN DEL USUARIO
     @Get('foto')

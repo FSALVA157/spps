@@ -3,6 +3,8 @@ import { InternoService } from './interno.service';
 import { CreateInternoDto } from './dto/create-interno.dto';
 import { EditInternoDto } from './dto/edit-interno.dto';
 import {Request, Response} from 'express';
+import { UsuarioService } from '../usuario/usuario.service';
+import { Usuario } from '../usuario/entities/usuario.entity';
 
 @Controller('interno')
 export class InternoController {
@@ -19,6 +21,49 @@ export class InternoController {
         return await this.internoService.getAll();
     }
     //FIN Petición http que lista todos los registros
+
+    //METODO PARA RETORNAR INTERNOS POR UNIDAD
+    @Get('buscar-por-unidad')
+    async getInternosXUnidad(@Req() req: Request){  
+        try {
+            if(!req.query.id_unidad){
+                throw new Error('Debe proporcionar la unidad');
+            }
+            const id_unidad: number = parseInt(req.query.id_unidad.toString());
+            return await this.internoService.getInternosByUnidad(id_unidad);
+                    
+        } catch (error) {
+            throw new BadRequestException(error.message);
+        }
+    }
+
+    //FIN METODO PARA RETORNAR INTERNOS POR UNIDAD
+
+    //METODO PARA RETORNAR INTERNOS POR UNIDAD DEL USUARIO
+    // @Get('buscar-por-unidad-usuario')
+    // async getInternosXUnidadUsuario(@Req() req: Request){  
+    //     let usuario: Usuario = null;
+    //     try {
+    //         if(!req.query.email){
+    //             throw new Error('Debe proporcionar el email del usuario');
+    //         }
+    //         const email = req.query.email.toString();
+    //         usuario = await this.usuarioService.getUserByEmail(email);
+                    
+    //     } catch (error) {
+    //         throw new BadRequestException(error.message);
+    //     }
+
+    //     if(usuario){
+    //         return await this.internoService.getInternosByUnidad(usuario.unidad_id);
+    //     }
+    //     else{
+    //         return await this.internoService.getInternosByUnidad(0);
+    //     }     
+
+    // }
+
+    //FIN METODO PARA RETORNAR INTERNOS POR UNIDAD DEL USUARIO
 
     //PETICION HTTP PARA RETORNAR PLANILLA ANTECEDENTES    
     @Get('planilla-antecedentes')

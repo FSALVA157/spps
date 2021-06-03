@@ -71,6 +71,12 @@ export class UsuarioService {
     }
     //FIN BUSCAR X EMAIL
 
+    //BUSCAR POR UNIDAD
+    async getUsersByUnidad(id_unidad: number){
+        return await this.usuarioRepository.find({unidad_id: id_unidad});
+    }
+    //FIN BUSCAR X UNIDAD
+
     //GUARDAR FOTO EN BASE DE DATOS
     //guarda el nombre de la foto en el campo foto del usuario
     async cargarFoto(foto_url: string, id: number){

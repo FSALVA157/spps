@@ -30,14 +30,14 @@ export class CreateUsuarioDto {
     @IsOptional()
     foto: string;
 
+    @IsNumber()
+    unidad_id: number;
     
     @IsOptional()
     @IsEnum(UsuarioRole,{
         message: `No ha introducido un valor valido(${EnumToString(UsuarioRole)})`
     })
-    role: UsuarioRole;
-
-    
+    role: UsuarioRole;    
     
 
 }
