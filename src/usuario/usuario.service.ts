@@ -19,7 +19,7 @@ export class UsuarioService {
      * @returns 
      */
     async getAll(){
-        return await this.usuarioRepository.findAndCount();
+        return await this.usuarioRepository.find();
     }
 
     /**
@@ -73,6 +73,7 @@ export class UsuarioService {
 
     //BUSCAR POR UNIDAD
     async getUsersByUnidad(id_unidad: number){
+        console.log("usuarios",await this.usuarioRepository.findAndCount({unidad_id: id_unidad}));
         return await this.usuarioRepository.find({unidad_id: id_unidad});
     }
     //FIN BUSCAR X UNIDAD

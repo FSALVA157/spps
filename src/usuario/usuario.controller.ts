@@ -39,7 +39,6 @@ export class UsuarioController {
             throw new BadRequestException(error.message);
         }
     }
-
     //FIN METODO PARA RETORNAR USUARIOS POR UNIDAD
 
     //METODO PARA RETORNAR USUARIOS POR UNIDAD DEL ADMINISTRADOR
