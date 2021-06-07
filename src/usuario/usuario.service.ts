@@ -21,6 +21,7 @@ export class UsuarioService {
     async getAll(){
         return await this.usuarioRepository.find();
     }
+    //----------------------------------
 
     /**
      * Servicio que retorna un registro de la tabla USUARIO según ID
@@ -30,12 +31,16 @@ export class UsuarioService {
     async getOne(id:number){
         return await this.usuarioRepository.findOneOrFail(id);
     }
+    //----------------------------------
 
+    //EDITAR USUARIO
     async editOne(id: number, data: EditUsuarioDto){
         const respuesta = await this.usuarioRepository.update(id,data);
         if((await respuesta).affected == 0) throw new NotFoundException("No existe el registro de Usuario que intenta modificar");
         return respuesta;
     }
+    //FIN EDITAR USUARIO
+    //----------------------------------
 
     /**
      * Servicio que elimina un registro de la tabla USUARIO según id
@@ -48,7 +53,9 @@ export class UsuarioService {
         if(!respuesta) throw new NotFoundException("No existe el registro Usuario que desea eliminar");
         return await this.usuarioRepository.remove(respuesta);        
     }
+    //----------------------------------
 
+    
     /**
      * Servicio que crea un nuevo registro de la tabla USUARIO
      * @param data 
@@ -60,6 +67,7 @@ export class UsuarioService {
         const nuevo = this.usuarioRepository.create(data);
         return await this.usuarioRepository.save(nuevo)
     }
+    //----------------------------------
 
     //BUSCAR POR EMAIL
     async getUserByEmail(email: string){
@@ -70,13 +78,15 @@ export class UsuarioService {
                 .getOne()
     }
     //FIN BUSCAR X EMAIL
+    //----------------------------------
 
-    //BUSCAR POR UNIDAD
+    //BUSCAR USUARIOS POR UNIDAD
     async getUsersByUnidad(id_unidad: number){
         console.log("usuarios",await this.usuarioRepository.findAndCount({unidad_id: id_unidad}));
         return await this.usuarioRepository.find({unidad_id: id_unidad});
     }
-    //FIN BUSCAR X UNIDAD
+    //FIN BUSCAR USUARIOS POR UNIDAD
+    //----------------------------------
 
     //GUARDAR FOTO EN BASE DE DATOS
     //guarda el nombre de la foto en el campo foto del usuario
@@ -106,6 +116,7 @@ export class UsuarioService {
         return resultado;
     }
     //FIN GUARDAR FOTO EN BASE DE DATOS
+    //----------------------------------
 
     //METODO PARA RETORNAR ARCHIVO IMAGEN DEL USUARIO POR NOMBRE DE LA FOTO
     getFoto(nombre_foto: string){
@@ -119,4 +130,5 @@ export class UsuarioService {
     
     }
     //FIN METODO PARA RETORNAR ARCHIVO IMAGEN POR NOMBRE
+    //----------------------------------
 }

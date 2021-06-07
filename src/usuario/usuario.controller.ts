@@ -24,6 +24,7 @@ export class UsuarioController {
     async getAll(){
         return await this.usuarioService.getAll();
     }
+    //--------
 
     //METODO PARA RETORNAR USUARIOS POR UNIDAD
     @Get('buscar-por-unidad')
@@ -40,6 +41,7 @@ export class UsuarioController {
         }
     }
     //FIN METODO PARA RETORNAR USUARIOS POR UNIDAD
+    //--------
 
     //METODO PARA RETORNAR USUARIOS POR UNIDAD DEL ADMINISTRADOR
     @Get('buscar-por-unidad-admin')
@@ -67,7 +69,7 @@ export class UsuarioController {
         
     }
     //FIN METODO PARA RETORNAR USUARIOS POR UNIDAD DEL ADMINISTRADOR
-
+    //--------
 
     //METODO PARA RETORNAR ARCHIVO IMAGEN DEL USUARIO
     @Get('foto')
@@ -92,6 +94,7 @@ export class UsuarioController {
         }
      }
     //FIN PARA RETORNAR ARCHIVO POR IMAGEN
+    //--------
 
     /**
      * Petición http que devuelve un registro según id
@@ -105,6 +108,7 @@ export class UsuarioController {
     ){
         return await this.usuarioService.getOne(id);
     }
+    //--------
 
     /**
      * Petición http que crea un nuevo registro
@@ -118,6 +122,7 @@ export class UsuarioController {
     ){
         return await this.usuarioService.createOne(data);
     }
+    //--------
 
     /**
      * Petición http que edita un registro según id
@@ -134,6 +139,7 @@ export class UsuarioController {
     ){
         return await this.usuarioService.editOne(id, data);
     }
+    //--------
 
     /**
      * Petición http que elimina un registro según id
@@ -147,6 +153,7 @@ export class UsuarioController {
     ){
         return await this.usuarioService.deleteOne(id);
     }
+    //--------
 
     //METODO CARGAR IMAGEN
     @Post('foto')
@@ -190,8 +197,8 @@ export class UsuarioController {
             throw new BadRequestException(req.query.id +'No olvide adjuntar un archivo imagen y el parámetro id del  usuario!!');
         }
     }
-
     //FIN METODO CARGAR IMAGEN
+    //--------
 
     
 }
