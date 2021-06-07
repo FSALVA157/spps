@@ -21,6 +21,7 @@ export class InternoController {
         return await this.internoService.getAll();
     }
     //FIN Petición http que lista todos los registros
+    //----------------------------------
 
     //METODO PARA RETORNAR INTERNOS POR UNIDAD
     @Get('buscar-por-unidad')
@@ -36,8 +37,8 @@ export class InternoController {
             throw new BadRequestException(error.message);
         }
     }
-
     //FIN METODO PARA RETORNAR INTERNOS POR UNIDAD
+    //----------------------------------
 
     //METODO PARA RETORNAR INTERNOS POR UNIDAD DEL USUARIO
     // @Get('buscar-por-unidad-usuario')
@@ -64,6 +65,7 @@ export class InternoController {
     // }
 
     //FIN METODO PARA RETORNAR INTERNOS POR UNIDAD DEL USUARIO
+    //----------------------------------
 
     //PETICION HTTP PARA RETORNAR PLANILLA ANTECEDENTES    
     @Get('planilla-antecedentes')
@@ -80,6 +82,7 @@ export class InternoController {
         }
     }
     //FIN RETORNAR PLANILLA ANTECEDENTES
+    //----------------------------------
 
 
     /**
@@ -95,6 +98,7 @@ export class InternoController {
         return await this.internoService.getOne(id);
     }
     //FIN Petición http que devuelve un registro según id
+    //----------------------------------
 
     /**
      * Petición http que crea un nuevo registro
@@ -109,6 +113,7 @@ export class InternoController {
         return await this.internoService.createOne(data);
     }
     //FIN Petición http que crea un nuevo registro
+    //----------------------------------
 
     /**
      * Petición http que edita un registro según id
@@ -126,6 +131,7 @@ export class InternoController {
         return await this.internoService.editOne(id, data);
     }
     //FIN Petición http que edita un registro según id
+    //----------------------------------
 
     /**
      * Petición http que elimina un registro según id
@@ -140,6 +146,7 @@ export class InternoController {
         return await this.internoService.deleteOne(id);
     }
     //FIN Petición http que elimina un registro según id
+    //----------------------------------
 
 
 }

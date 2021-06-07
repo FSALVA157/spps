@@ -22,6 +22,7 @@ export class InternoService {
         //const [data, total] = await this.internoRepository.findAndCount();
         return await this.internoRepository.findAndCount();
     }
+    //----------------------------------
 
     
     /**
@@ -32,12 +33,14 @@ export class InternoService {
     async getOne(id:number){
         return await this.internoRepository.findOneOrFail(id);
     }
+    //----------------------------------
 
     async editOne(id: number, data: EditInternoDto){
         const respuesta = await this.internoRepository.update(id,data);
         if((await respuesta).affected == 0) throw new NotFoundException("No existe el registro de Interno que intenta modificar");
         return respuesta;
     }
+    //----------------------------------
 
     /**
      * Servicio que elimina un registro de la tabla INTERNO según id
@@ -50,6 +53,7 @@ export class InternoService {
         if(!respuesta) throw new NotFoundException("No existe el registro Interno que desea eliminar");
         return await this.internoRepository.remove(respuesta);        
     }
+    //----------------------------------
 
     /**
      * Servicio que crea un nuevo registro de la tabla INTERNO
@@ -63,12 +67,14 @@ export class InternoService {
         const nuevo = this.internoRepository.create(data);
         return await this.internoRepository.save(nuevo)
     }
+    //----------------------------------
 
     //BUSCAR POR UNIDAD
     async getInternosByUnidad(id_unidad: number){
         return await this.internoRepository.find({unidad_id: id_unidad});
     }
     //FIN BUSCAR X UNIDAD
+    //----------------------------------
 
     //METODO PLANILLA ANTECEDENTES
     async getPlanillaAntecedentes(in_prontuario:number){
@@ -124,4 +130,5 @@ export class InternoService {
         return planillaAntecedentes;
     }
     //FIN METODO PLANILLA ANTECEDENTES
+    //----------------------------------
 }
