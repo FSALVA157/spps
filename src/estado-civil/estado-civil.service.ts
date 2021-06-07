@@ -58,7 +58,6 @@ export class EstadoCivilService {
     async createOne(data: CreateEstadoCivilDto){
         const existe = await this.estadoCivilRepository.findOne({estado_civil: data.estado_civil});
         if(existe) throw new BadRequestException("El registro que intenta crear ya existe");
-        data.estado_civil="soltero";
         const nuevo = this.estadoCivilRepository.create(data);
         return await this.estadoCivilRepository.save(nuevo)
     }
