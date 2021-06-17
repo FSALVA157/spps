@@ -34,6 +34,7 @@ export class UsuarioController {
                 throw new Error('Debe proporcionar la unidad');
             }
             const id_unidad: number = parseInt(req.query.id_unidad.toString());
+            console.log("usuarios lista en controlador",await this.usuarioService.getUsersByUnidad(id_unidad));
             return await this.usuarioService.getUsersByUnidad(id_unidad);
                     
         } catch (error) {
