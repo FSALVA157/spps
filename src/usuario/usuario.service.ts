@@ -73,6 +73,7 @@ export class UsuarioService {
     async getUserByEmail(email: string){
         return await this.usuarioRepository
                 .createQueryBuilder('user')
+                .leftJoinAndSelect("user.unidad", "unidad")
                 .where({correo: email})
                 .addSelect('user.clave')
                 .getOne()
