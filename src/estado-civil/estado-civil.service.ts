@@ -20,7 +20,7 @@ export class EstadoCivilService {
      * @returns 
      */
     async getAll(){
-        return await this.estadoCivilRepository.findAndCount();
+        return await this.estadoCivilRepository.find();
     }
 
     /**

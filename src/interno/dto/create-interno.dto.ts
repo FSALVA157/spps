@@ -87,7 +87,7 @@ export class CreateInternoDto {
     nivel_educacion_id: number;
 
     @IsString()
-    @Length(2,50,{message:'La Profesion de Emergencia debe tener entre 2 a 150 caracteres'})
+    @Length(2,50,{message:'La Profesion debe tener entre 2 a 150 caracteres'})
     profesion: string;
 
     @IsNumber()
@@ -186,6 +186,7 @@ export class CreateInternoDto {
     @IsNumber()
     jurisdiccion_provinicia_id: number;
 
+    @IsDateString()
     fecha_detencion: Date; 
 
     @IsNumber()
@@ -202,7 +203,8 @@ export class CreateInternoDto {
 
     @IsNumber()
     computo: number;
-
+    
+    @IsDateString()
     fecha_cumple: Date; 
 
     @IsNumber()
