@@ -17,7 +17,7 @@ export class SexoService {
      * @returns 
      */
     async getAll(){
-        return await this.sexoRepository.findAndCount();
+        return await this.sexoRepository.find();
     }
 
     /**
