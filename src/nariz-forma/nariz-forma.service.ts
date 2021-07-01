@@ -17,7 +17,7 @@ export class NarizFormaService {
      * @returns 
      */
     async getAll(){
-        return await this.narizFormaRepository.findAndCount();
+        return await this.narizFormaRepository.find();
     }
 
     /**

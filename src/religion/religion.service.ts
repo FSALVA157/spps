@@ -17,7 +17,7 @@ export class ReligionService {
      * @returns 
      */
     async getAll(){
-        return await this.religionRepository.findAndCount();
+        return await this.religionRepository.find();
     }
 
     /**

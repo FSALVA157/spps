@@ -18,7 +18,7 @@ export class PielService {
      * @returns 
      */
     async getAll(){
-        return await this.pielRepository.findAndCount();
+        return await this.pielRepository.find();
     }
 
     /**

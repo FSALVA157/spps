@@ -18,7 +18,7 @@ export class TipoDefensorService {
      * @returns 
      */
     async getAll(){
-        return await this.tipoDefensorRepository.findAndCount();
+        return await this.tipoDefensorRepository.find();
     }
 
     /**

@@ -18,7 +18,7 @@ export class NivelEducacionService {
      * @returns 
      */
     async getAll(){
-        return await this.nivelEducacionRepository.findAndCount();
+        return await this.nivelEducacionRepository.find();
     }
 
     /**

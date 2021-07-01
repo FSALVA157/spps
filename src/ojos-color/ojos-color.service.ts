@@ -17,7 +17,7 @@ export class OjosColorService {
      * @returns 
      */
     async getAll(){
-        return await this.ojosColorRepository.findAndCount();
+        return await this.ojosColorRepository.find();
     }
 
     /**

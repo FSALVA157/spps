@@ -19,7 +19,7 @@ export class ReincidenciaService {
      * @returns 
      */
     async getAll(){
-        return await this.reincidenciaRepository.findAndCount();
+        return await this.reincidenciaRepository.find();
     }
 
     /**

@@ -17,7 +17,7 @@ export class OjosTamanioService {
      * @returns 
      */
     async getAll(){
-        return await this.ojosTamanioRepository.findAndCount();
+        return await this.ojosTamanioRepository.find();
     }
 
     /**

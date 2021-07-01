@@ -18,7 +18,7 @@ export class OficioService {
      * @returns 
      */
     async getAll(){
-        return await this.oficioRepository.findAndCount();
+        return await this.oficioRepository.find();
     }
 
     /**

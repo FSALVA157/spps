@@ -19,7 +19,7 @@ export class PeloColorService {
      * @returns 
      */
     async getAll(){
-        return await this.peloColorRepository.findAndCount();
+        return await this.peloColorRepository.find();
     }
 
     /**

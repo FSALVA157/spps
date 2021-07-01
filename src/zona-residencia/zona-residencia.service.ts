@@ -20,7 +20,7 @@ export class ZonaResidenciaService {
      */
     
     async getAll(){
-        return await this.zonaResidenciaRepository.findAndCount();
+        return await this.zonaResidenciaRepository.find();
     }
     
     /**

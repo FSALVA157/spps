@@ -18,7 +18,7 @@ export class ReingresoService {
      * @returns 
      */
     async getAll(){
-        return await this.reingresoRepository.findAndCount();
+        return await this.reingresoRepository.find();
     }
 
     /**

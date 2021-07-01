@@ -17,7 +17,7 @@ export class NarizTamanioService {
      * @returns 
      */
     async getAll(){
-        return await this.narizTamanioRepository.findAndCount();
+        return await this.narizTamanioRepository.find();
     }
 
     /**

@@ -18,7 +18,7 @@ export class EstadoProcesalService {
      * @returns 
      */
     async getAll(){
-        return await this.estadoProcesalRepository.findAndCount();
+        return await this.estadoProcesalRepository.find();
     }
 
     /**

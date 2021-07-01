@@ -18,7 +18,7 @@ export class PeloTipoService {
      * @returns 
      */
     async getAll(){
-        return await this.peloTipoRepository.findAndCount();
+        return await this.peloTipoRepository.find();
     }
 
     /**

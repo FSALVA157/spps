@@ -18,7 +18,7 @@ export class UnidadService {
      * @returns 
      */
     async getAll(){
-        return await this.unidadRepository.findAndCount();
+        return await this.unidadRepository.find();
     }
 
     /**

@@ -18,7 +18,7 @@ export class PabellonService {
      * @returns 
      */
     async getAll(){
-        return await this.pabellonRepository.findAndCount();
+        return await this.pabellonRepository.find();
     }
 
     /**

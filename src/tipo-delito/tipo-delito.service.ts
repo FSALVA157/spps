@@ -18,7 +18,7 @@ export class TipoDelitoService {
      * @returns 
      */
     async getAll(){
-        return await this.tipoDelitoRepository.findAndCount();
+        return await this.tipoDelitoRepository.find();
     }
 
     /**

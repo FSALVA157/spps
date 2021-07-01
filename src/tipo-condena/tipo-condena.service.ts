@@ -18,7 +18,7 @@ export class TipoCondenaService {
      * @returns 
      */
     async getAll(){
-        return await this.tipoCondenaRepository.findAndCount();
+        return await this.tipoCondenaRepository.find();
     }
 
     /**

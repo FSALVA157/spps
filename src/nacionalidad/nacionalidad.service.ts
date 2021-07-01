@@ -18,7 +18,7 @@ export class NacionalidadService {
      * @returns 
      */
     async getAll(){
-        return await this.nacionalidadRepository.findAndCount();
+        return await this.nacionalidadRepository.find();
     }
 
     /**

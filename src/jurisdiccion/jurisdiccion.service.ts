@@ -18,7 +18,7 @@ export class JurisdiccionService {
      * @returns 
      */
     async getAll(){
-        return await this.jurisdiccionRepository.findAndCount();
+        return await this.jurisdiccionRepository.find();
     }
 
     /**

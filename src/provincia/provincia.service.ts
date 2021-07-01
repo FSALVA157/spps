@@ -18,7 +18,7 @@ export class ProvinciaService {
      * @returns 
      */
     async getAll(){
-        return await this.provinciaRepository.findAndCount();
+        return await this.provinciaRepository.find();
     }
 
     /**

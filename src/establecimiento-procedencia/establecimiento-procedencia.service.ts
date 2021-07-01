@@ -18,7 +18,7 @@ export class EstablecimientoProcedenciaService {
      * @returns 
      */
     async getAll(){
-        return await this.establecimientoProcedenciaRepository.findAndCount();
+        return await this.establecimientoProcedenciaRepository.find();
     }
 
     /**

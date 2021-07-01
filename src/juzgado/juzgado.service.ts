@@ -18,7 +18,7 @@ export class JuzgadoService {
      * @returns 
      */
     async getAll(){
-        return await this.juzgadoRepository.findAndCount();
+        return await this.juzgadoRepository.find();
     }
 
     /**
