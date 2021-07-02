@@ -15,7 +15,7 @@ export class ZonaResidenciaService {
     
     
     /**
-     * Servicio que retorna todos los registros de la tabla ZONA-RESIDENCIA
+     * Servicio que retorna todos los registros de la tabla ZONA-RESIDENCIA 
      * @returns 
      */
     
