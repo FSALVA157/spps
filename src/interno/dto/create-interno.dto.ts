@@ -1,4 +1,4 @@
-import{ Length, IsString, IsInt, isInt, IsDate, IsNumber, IsDateString} from 'class-validator';
+import{ Length, IsString, IsInt, isInt, IsDate, IsNumber, IsDateString, IsOptional} from 'class-validator';
 
 
 export class CreateInternoDto {
@@ -213,5 +213,9 @@ export class CreateInternoDto {
     @IsString()
     @Length(2,50,{message:'El Abogado debe tener entre 2 a 50 caracteres'})
     abogado: string;
+
+    @IsString()
+    @IsOptional()
+    foto: string;
 
 }

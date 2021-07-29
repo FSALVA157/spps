@@ -154,7 +154,7 @@ export class UsuarioController {
     ){
         return await this.usuarioService.deleteOne(id);
     }
-    //--------
+    //-----------------------------------------------------
 
     //METODO CARGAR IMAGEN
     @Post('foto')
@@ -199,7 +199,7 @@ export class UsuarioController {
         }
     }
     //FIN METODO CARGAR IMAGEN
-    //--------
+    //------------------------
 
     
 }

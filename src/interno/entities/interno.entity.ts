@@ -697,6 +697,13 @@ export class  Interno {
     })
     abogado: string;
 
+    @Column({
+        type: "varchar",
+        length: 200,
+        nullable: true
+    })
+    foto: string;
+
    @CreateDateColumn()
    fecha_alta: Date;
 
