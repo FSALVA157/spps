@@ -2,10 +2,15 @@ import { BadRequestException, Body, Controller, Delete, Get, HttpException, Http
 import { InternoService } from './interno.service';
 import { CreateInternoDto } from './dto/create-interno.dto';
 import { EditInternoDto } from './dto/edit-interno.dto';
-import {Request, Response} from 'express';
+
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import * as path from 'path';
+import { v4 as uuid } from 'uuid';
+import {Request, Response} from 'express';
+
+
+
 
 @Controller('interno')
 export class InternoController {
@@ -96,7 +101,7 @@ export class InternoController {
      ){        
         try {
             if(!req.query.foto_nombre){
-                throw new Error('Debe proporcionar el nombre de la foto del Interno');
+                throw new Error('Debe proporcionar el nombre de la foto del Internoxxx');
             }
             const nombre_foto: string = req.query.foto_nombre.toString();
             
@@ -175,56 +180,49 @@ export class InternoController {
     //FIN Petición http que elimina un registro según id
     //--------------------------------------------------
 
-    //METODO CARGAR IMAGEN
-    @Post('foto')
-    @UseInterceptors(
-        FileInterceptor(
-            'foto_carga',{
-                storage: diskStorage({
-                    destination: path.join(__dirname,'../../internos-pictures'),
-                        filename: (req, file, cb) => {
-                            cb(null, uuid() + path.extname(file.originalname))
-                        },
-                    },
-                ),
-                fileFilter: (req, file, cb) => {                    
-                    if(!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)){
-                                        return cb(new HttpException('Formato de archivo inválido (jpg|jpeg|png|gif)', HttpStatus.BAD_REQUEST),false);
-                                    
-                    }
-                        cb(null, true);                                               
-                    }
-            }
-        )   
-    )
-    async cargarFoto(
-        @UploadedFile()
-        foto: Express.Multer.File,
-        @Req()
-        req: Request,    
-    ){
-        try {
-            if(req.query.id === null || foto === null){
-                    throw new Error;
-            }
-            const id: number = parseInt(req.query.id.toString());
-            
-            console.log(foto);
-            return await this.internoService.cargarFoto(foto.filename, id);
-            
-        } catch (error) {
+     //METODO CARGAR IMAGEN
+     @Post('foto')
+     @UseInterceptors(
+         FileInterceptor(
+             'foto_carga',{
+                 storage: diskStorage({
+                     destination: path.join(__dirname,'../../pictures/internos'),
+                         filename: (req, file, cb) => {
+                             cb(null, uuid() + path.extname(file.originalname))
+                         },
+                     },
+                 ),
+                 fileFilter: (req, file, cb) => {                    
+                     if(!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)){
+                                         return cb(new HttpException('Formato de archivo inválido (jpg|jpeg|png|gif)', HttpStatus.BAD_REQUEST),false);
+                                     
+                     }
+                         cb(null, true);                                               
+                     }
+             }
+         )   
+     )
+     async cargarFoto(
+         @UploadedFile()
+         foto: Express.Multer.File,
+         @Req()
+         req: Request,    
+     ){
+         try {
+             if(req.query.id === null || foto === null){
+                     throw new Error;
+             }
+             const id: number = parseInt(req.query.id.toString());
+             
+             console.log(foto);
+             return await this.internoService.cargarFoto(foto.filename, id);
+             
+         } catch (error) {
+ 
+             throw new BadRequestException(req.query.id +'No olvide adjuntar un archivo imagen y el parámetro id del  usuario!!');
+         }
+     }
+     //FIN METODO CARGAR IMAGEN
+     //------------------------
 
-            throw new BadRequestException(req.query.id +'No olvide adjuntar un archivo imagen y el parámetro id del  usuario!!');
-        }
     }
-    //FIN METODO CARGAR IMAGEN
-    //------------------------
-
-
-}
-
-
-function uuid() {
-    throw new Error('Function not implemented.');
-}
-

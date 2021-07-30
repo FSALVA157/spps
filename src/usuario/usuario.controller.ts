@@ -2,6 +2,7 @@ import { BadRequestException, Body, Controller, Delete, Get, HttpException, Http
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { EditUsuarioDto } from './dto/edit-usuario.dto';
+
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import * as path from 'path';

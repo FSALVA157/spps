@@ -144,9 +144,9 @@ export class InternoService {
         }    
         
         //si ya existe una foto vamos a eliminarla de la carpeta de imagenes
-        //`internos-pictures/${interno.foto}` es la ruta a la imagen
+        //`pictures/internos/${interno.foto}` es la ruta a la imagen
         if(interno.foto !== null){            
-                fs.unlink(path.resolve(`internos-pictures/${interno.foto}`)).then().catch(error=>{
+                fs.unlink(path.resolve(`pictures/internos/${interno.foto}`)).then().catch(error=>{
                 
                     console.log(error);
                 });            
@@ -167,7 +167,7 @@ export class InternoService {
     //METODO PARA RETORNAR ARCHIVO IMAGEN DEL USUARIO POR NOMBRE DE LA FOTO
     getFoto(nombre_foto: string){
         try {
-            const ruta = path.resolve(__dirname,`../../internos-pictures/${nombre_foto}`);
+            const ruta = path.resolve(__dirname,`../../pictures/internos/${nombre_foto}`);
             return ruta;            
             
         } catch (error) {
