@@ -46,15 +46,15 @@ import { PlanillaAntecedentesModule } from './planilla-antecedentes/planilla-ant
       useFactory: (config: ConfigService) => ({
         type: 'mysql',
         //host: config.get<string>(DATABASE_HOST),
-        host: "b0vnpyobuzc5d4agzfrf-mysql.services.clever-cloud.com",
-        port: parseInt(config.get<string>(DATABASE_PORT),10),
-        //port: 3306,
+        host: "bnardwwujuu8gmronhn8-mysql.services.clever-cloud.com",
+        //port: parseInt(config.get<string>(DATABASE_PORT),10),
+        port: 3306,
         //username: config.get<string>(DATABASE_USERNAME),
-        username:"urkheir7tbbo7nfl",
+        username:"u52ohlimygtf8j0m",
         //password: config.get<string>(DATABASE_PASSWORD),
-        password:"5j1D9ucvCyg52BAGofe8",
+        password:"HRnxCppIgy0n4W0mlge6",
         //database: config.get<string>(DATABASE_NAME),
-        database: "b0vnpyobuzc5d4agzfrf",
+        database: "bnardwwujuu8gmronhn8",
         entities: [__dirname + "./**/**/*.entity{.ts,.js}"],
         autoLoadEntities: true,
         synchronize: true
@@ -100,5 +100,4 @@ import { PlanillaAntecedentesModule } from './planilla-antecedentes/planilla-ant
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
-}
+export class AppModule {}

@@ -80,14 +80,12 @@ export class  Interno {
     
     @Column({
         type: "varchar",
-        length: 50,
-        nullable: false
+        length: 50        
     })
     alias: string;
 
     @Column({
-        type: "int",
-        nullable: false
+        type: "int"        
     })
     dni: number;
 
@@ -123,17 +121,30 @@ export class  Interno {
 
     @Column({
         type: "varchar",
-        length: 50,
-        nullable: false
-    })
+        length: 50
+          })
     telefono: string;
 
     @Column({
         type: "varchar",
-        length: 50,
+        length: 100,
+            })
+    domicilio: string;
+
+    //DEPARTAMENTO
+    @Column({
+        type: "int",
         nullable: false
     })
-    domicilio: string;
+    provincia_id: number; 
+    
+    @ManyToOne(type => Provincia,{eager: true})
+    @JoinColumn({
+        name: "provincia_id",
+        referencedColumnName: "id_provincia"
+    })
+    provincia: Provincia;
+    //FIN DEPARTAMENTO
 
     //DEPARTAMENTO
     @Column({
@@ -203,35 +214,35 @@ export class  Interno {
 
     @Column({
         type: "varchar",
-        length: 50,
+        length: 100,
         nullable: false
     })
     lugar_nacimiento: string;
 
     @Column({
         type: "varchar",
-        length: 50,
+        length: 200,
         nullable: true
     })
     padre: string;
 
     @Column({
         type: "varchar",
-        length: 50,
+        length: 200,
         nullable: true
     })
     madre: string;
 
     @Column({
         type: "varchar",
-        length: 150,
+        length: 500,
         nullable: true
     })
     parientes: string;
 
     @Column({
         type: "varchar",
-        length: 150,
+        length: 500,
         nullable: true
     })
     referente_emergencia: string;
@@ -253,7 +264,7 @@ export class  Interno {
     
     @Column({
         type: "varchar",
-        length: 50,
+        length: 300,
         nullable: true
     })
     profesion: string;
@@ -621,7 +632,7 @@ export class  Interno {
         name: "jurisdiccion_provinicia_id",
         referencedColumnName: "id_provincia"
     })
-    jurisdiccion_provinicia: Provincia;
+    jurisdiccion_provincia: Provincia;
     //FIN JURISDICCION-PROVINCIA
 
     @Column({
