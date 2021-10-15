@@ -12,19 +12,19 @@ export class CreateInternoDto {
     apellido_1: string;
 
     @IsString()
-    @Length(2,20,{message:'El Apellido debe tener entre 2 a 20 caracteres'})
+    @Length(2,20,{message:'El Segundo Apellido debe tener entre 2 a 20 caracteres'})
     apellido_2: string;
 
     @IsString()
-    @Length(2,20,{message:'El Nombre debe tener entre 2 a 20 caracteres'})
+    @Length(2,20,{message:'El Primer Nombre debe tener entre 2 a 20 caracteres'})
     nombre_1: string;
 
     @IsString()
-    @Length(2,20,{message:'El nombre debe tener entre 2 a 20 caracteres'})
+    @Length(2,20,{message:'El Segundo nombre debe tener entre 2 a 20 caracteres'})
     nombre_2: string;
 
     @IsString()
-    @Length(2,20,{message:'El Nombre debe tener entre 2 a 20 caracteres'})
+    @Length(2,20,{message:'El Tercer Nombre debe tener entre 2 a 20 caracteres'})
     nombre_3: string;
     
     @IsString()

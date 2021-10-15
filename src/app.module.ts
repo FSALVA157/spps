@@ -36,6 +36,7 @@ import { DepartamentoModule } from './departamento/departamento.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
 import { PlanillaAntecedentesModule } from './planilla-antecedentes/planilla-antecedentes.module';
+import { MarcaCorporalModule } from './marca-corporal/marca-corporal.module';
 
 
 
@@ -95,7 +96,8 @@ import { PlanillaAntecedentesModule } from './planilla-antecedentes/planilla-ant
     DepartamentoModule,
     UsuarioModule,
     AuthModule,
-    PlanillaAntecedentesModule
+    PlanillaAntecedentesModule,
+    MarcaCorporalModule
   ],
   controllers: [AppController],
   providers: [AppService],

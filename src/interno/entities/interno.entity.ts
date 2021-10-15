@@ -300,11 +300,13 @@ export class  Interno {
     //FIN RELIGION
 
     @Column({
-        type: "varchar",
-        length: 50,
+        type: "decimal",
+        precision: 3,
+        scale: 2,
+        default: 0,
         nullable: true
     })
-    talla: string;
+    altura: string;
 
     //OJOS-COLOR
     @Column({
@@ -411,12 +413,7 @@ export class  Interno {
     piel: Piel;
     //FIN PIEL
 
-    @Column({
-        type: "int",
-        nullable: false
-    })
-    marca_corporal: number;
-
+    
     //UNIDAD
     @Column({
         type: "int",
