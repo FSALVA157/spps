@@ -216,6 +216,10 @@ export class CreateInternoDto {
 
     @IsString()
     @IsOptional()
-    foto: string;
+    foto_frente: string;
+
+    @IsString()
+    @IsOptional()
+    foto_perfil: string;
 
 }

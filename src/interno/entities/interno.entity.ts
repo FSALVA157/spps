@@ -686,7 +686,7 @@ export class  Interno {
     //TIPO-DEFENSOR
     @Column({
         type: "int",
-        nullable: false
+        nullable: true
     })
     tipo_defensor_id: number;
 
@@ -700,17 +700,24 @@ export class  Interno {
 
     @Column({
         type: "varchar",
-        length: 50,
+        length: 500,
         nullable: true
     })
     abogado: string;
 
     @Column({
         type: "varchar",
-        length: 200,
+        length: 500,
         nullable: true
     })
-    foto: string;
+    foto_frente: string;
+
+    @Column({
+        type: "varchar",
+        length: 500,
+        nullable: true
+    })
+    foto_perfil: string;
 
    @CreateDateColumn()
    fecha_alta: Date;
