@@ -109,7 +109,7 @@ export class InternoService {
         planillaAntecedentes.prontuario_policial = interno.prontuario_policial;
         planillaAntecedentes.estado_procesal = interno.estado_procesal.estado_procesal;
         planillaAntecedentes.tipo_delito = interno.tipo_delito.tipo_delito;
-        planillaAntecedentes.jurisdiccion = interno.jurisdiccion.jurisdiccion;
+        planillaAntecedentes.jurisdiccion1 = interno.jurisdiccion1.jurisdiccion;
         planillaAntecedentes.reincidencia = interno.reincidencia.reincidencia;
         planillaAntecedentes.juzgado = interno.juzgado.juzgado;
         planillaAntecedentes.fecha_detencion = interno.fecha_detencion;
@@ -145,8 +145,8 @@ export class InternoService {
         
         //si ya existe una foto vamos a eliminarla de la carpeta de imagenes
         //`pictures/internos/${interno.foto}` es la ruta a la imagen
-        if(interno.foto !== null){            
-                fs.unlink(path.resolve(`pictures/internos/${interno.foto}`)).then().catch(error=>{
+        if(interno.foto_frente !== null){            
+                fs.unlink(path.resolve(`pictures/internos/${interno.foto_frente}`)).then().catch(error=>{
                 
                     console.log(error);
                 });            
@@ -154,7 +154,7 @@ export class InternoService {
 
         //reemplaza la foto actual por la subida
         let data: EditInternoDto = {
-            "foto": foto_url
+            "foto_frente": foto_url
         };
         
         const resultado = await this.internoRepository.update(id, data);

@@ -26,6 +26,7 @@ import { Reincidencia } from '../../reincidencia/entities/reincidencia.entity';
 import { Juzgado } from '../../juzgado/entities/juzgado.entity';
 import { Provincia } from '../../provincia/entities/provincia.entity';
 import { TipoDefensor } from '../../tipo-defensor/entities/tipo-defensor.entity';
+import { IsOptional } from "class-validator";
 
 /**
  * Tabla que contiene los campos de interno
@@ -221,14 +222,14 @@ export class  Interno {
 
     @Column({
         type: "varchar",
-        length: 200,
+        length: 500,
         nullable: true
     })
     padre: string;
 
     @Column({
         type: "varchar",
-        length: 200,
+        length: 500,
         nullable: true
     })
     madre: string;
@@ -564,14 +565,29 @@ export class  Interno {
         type: "int",
         nullable: false
     })
-    jurisdiccion_id: number;
+    jurisdiccion1_id: number;
 
     @ManyToOne(type => Jurisdiccion,{eager: true})
     @JoinColumn({
-        name: "jurisdiccion_id",
+        name: "jurisdiccion1_id",
         referencedColumnName: "id_jurisdiccion"
     })
-    jurisdiccion: Jurisdiccion;
+    jurisdiccion1: Jurisdiccion;
+
+    @Column({
+        type: "int",
+        nullable: false
+    })
+    jurisdiccion2_id: number;
+
+    @ManyToOne(type => Jurisdiccion,{eager: true})
+    @JoinColumn({
+        name: "jurisdiccion2_id",
+        referencedColumnName: "id_jurisdiccion"
+    })
+    jurisdiccion2: Jurisdiccion;
+
+
     //FIN JURISDICCION
 
     //REINCIDENCIA
@@ -705,6 +721,8 @@ export class  Interno {
     })
     abogado: string;
 
+
+//manejo de fotos
     @Column({
         type: "varchar",
         length: 500,
@@ -718,6 +736,31 @@ export class  Interno {
         nullable: true
     })
     foto_perfil: string;
+    //fin manejo de fotos
+
+    //manejo de estados para sistema de visitas
+    @Column({
+        default: false,
+        nullable: true
+    })
+    @IsOptional()
+    sancionado?: boolean
+
+    @Column({
+        default: false,
+        nullable: true
+    })
+    @IsOptional()
+    programa_puerta?: boolean
+
+    @Column({
+        default: true,
+        nullable: true
+    })
+    @IsOptional()
+    esta?: boolean
+
+
 
    @CreateDateColumn()
    fecha_alta: Date;

@@ -31,7 +31,8 @@ export class PlanillaAntecedentes {
     expediente_policial: string; //falta consultar
     estado_procesal: string;
     tipo_delito: string;
-    jurisdiccion: string;
+    jurisdiccion1: string;
+    jurisdiccion2: string;
     reincidencia: string;
     juzgado: string;
     fecha_detencion: Date;

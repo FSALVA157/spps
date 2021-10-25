@@ -37,6 +37,7 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
 import { PlanillaAntecedentesModule } from './planilla-antecedentes/planilla-antecedentes.module';
 import { MarcaCorporalModule } from './marca-corporal/marca-corporal.module';
+import { LocalidadModule } from './localidad/localidad.module';
 
 
 
@@ -97,7 +98,8 @@ import { MarcaCorporalModule } from './marca-corporal/marca-corporal.module';
     UsuarioModule,
     AuthModule,
     PlanillaAntecedentesModule,
-    MarcaCorporalModule
+    MarcaCorporalModule,
+    LocalidadModule
   ],
   controllers: [AppController],
   providers: [AppService],

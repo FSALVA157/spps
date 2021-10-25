@@ -168,7 +168,10 @@ export class CreateInternoDto {
     tipo_delito_id: number;
 
     @IsNumber()
-    jurisdiccion_id: number;
+    jurisdiccion1_id: number;
+
+    @IsNumber()
+    jurisdiccion2_id: number;
 
     @IsNumber()
     reincidencia_id: number;
@@ -184,7 +187,7 @@ export class CreateInternoDto {
     detenciones: string;
 
     @IsNumber()
-    jurisdiccion_provinicia_id: number;
+    jurisdiccion_provincia_id: number;
 
     @IsDateString()
     fecha_detencion: Date; 
