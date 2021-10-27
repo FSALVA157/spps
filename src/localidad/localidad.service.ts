@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Localidad } from './entities/localidad.entity';
@@ -16,7 +16,16 @@ export class LocalidadService {
         try {
             return await this.localidadRepository.findAndCount();
         } catch (error ) {
-            return new Error(error.message);
+                throw new Error(error.message);
+                
+        }
+    }
+
+    async getOne(id: number){
+        try {
+            return await this.localidadRepository.findOneOrFail(id);
+        } catch (error) {
+            throw new Error(error.message);            
         }
     }
 
