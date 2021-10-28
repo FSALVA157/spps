@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { EditLocalidadDto } from './dto/edit-localidad.dto';
 import { Localidad } from './entities/localidad.entity';
 
 @Injectable()
@@ -24,6 +25,14 @@ export class LocalidadService {
     async getOne(id: number){
         try {
             return await this.localidadRepository.findOneOrFail(id);
+        } catch (error) {
+            throw new Error(error.message);            
+        }
+    }
+
+    async editOne(id: number, data: EditLocalidadDto){
+        try {
+            return await this.localidadRepository.update(id, data);
         } catch (error) {
             throw new Error(error.message);            
         }

@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post, Put, Req, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, HttpException, HttpStatus, NotFoundException, Param, ParseIntPipe, Post, Put, Req, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { InternoService } from './interno.service';
 import { CreateInternoDto } from './dto/create-interno.dto';
 import { EditInternoDto } from './dto/edit-interno.dto';
@@ -74,19 +74,19 @@ export class InternoController {
     //----------------------------------
 
     //PETICION HTTP PARA RETORNAR PLANILLA ANTECEDENTES    
-    @Get('planilla-antecedentes')
-    async getPlanillaAntecedentes(@Req() req: Request){  
-        try {
-            if(!req.query.prontuario){
-                throw new Error('Debe proporcionar el prontuario');
-            }
-            const prontuario: number = parseInt(req.query.prontuario.toString());
-            return await this.internoService.getPlanillaAntecedentes(prontuario);
+    // @Get('planilla-antecedentes')
+    // async getPlanillaAntecedentes(@Req() req: Request){  
+    //     try {
+    //         if(!req.query.prontuario){
+    //             throw new Error('Debe proporcionar el prontuario');
+    //         }
+    //         const prontuario: number = parseInt(req.query.prontuario.toString());
+    //         return await this.internoService.getPlanillaAntecedentes(prontuario);
                     
-        } catch (error) {
-            throw new BadRequestException(error.message);
-        }
-    }
+    //     } catch (error) {
+    //         throw new BadRequestException(error.message);
+    //     }
+    // }
     //FIN RETORNAR PLANILLA ANTECEDENTES
     //----------------------------------
 
@@ -224,5 +224,31 @@ export class InternoController {
      }
      //FIN METODO CARGAR IMAGEN
      //------------------------
+
+     //RETORNAR PLANILLA
+     @Get('planilla')
+     async planilla(
+        @Req()
+        req: Request,
+     ){
+         console.log('REQUEST: ', req);
+         try {
+            const pront: number = parseInt(req.query.pront.toString());
+
+             return await this.internoService.planilla(pront)
+                            .then((result) => {
+                                if (result){
+                                    return result;
+                                }
+                                else{
+                                    throw new NotFoundException();
+                                    
+                                }
+                            });
+         } catch (error) {
+            throw new BadRequestException();
+                      
+         }
+     }
 
     }
