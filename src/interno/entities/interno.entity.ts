@@ -638,7 +638,7 @@ export class  Interno {
         type: "int",
         nullable: false
     })
-    jurisdiccion_provinicia_id: number;
+    jurisdiccion_provincia_id: number;
 
     @ManyToOne(type => Provincia,{eager: true})
     @JoinColumn({

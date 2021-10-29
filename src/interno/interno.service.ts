@@ -96,7 +96,7 @@ export class InternoService {
 
     //BUSCAR POR UNIDAD
     async getInternosByUnidad(id_unidad: number){
-        return await this.internoRepository.find({unidad_id: id_unidad});
+        return await this.internoRepository.findAndCount({unidad_id: id_unidad});
     }
     //FIN BUSCAR X UNIDAD
     //----------------------------------

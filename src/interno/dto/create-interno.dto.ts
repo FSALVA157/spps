@@ -49,6 +49,9 @@ export class CreateInternoDto {
     domicilio: string;
 
     @IsNumber()
+    provincia_id
+
+    @IsNumber()
     departamento_id: number; 
 
     @IsNumber()
@@ -96,9 +99,9 @@ export class CreateInternoDto {
     @IsNumber()
     religion_id: number;
 
-    @IsString()
-    @Length(2,50,{message:'La talla debe tener entre 2 a 50 caracteres'})
-    talla: string;
+    // @IsString()
+    // @Length(2,50,{message:'La talla debe tener entre 2 a 50 caracteres'})
+    // talla: string;
 
     @IsNumber()
     ojos_color_id: number;
@@ -120,6 +123,10 @@ export class CreateInternoDto {
 
     @IsNumber()
     piel_id: number;
+
+    @IsString()
+    @Length(2,50,{message:'La altura debe tener entre 2 a 50 caracteres'})
+    altura: string;
 
     @IsNumber()
     marca_corporal: number;
