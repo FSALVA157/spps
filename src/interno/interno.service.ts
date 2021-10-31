@@ -45,17 +45,18 @@ export class InternoService {
     }
     //----------------------------------
 
-    async planilla(prontuario: number){
+    async planilla(in_prontuario: number){
         try {
-            return await this.internoRepository.findOneOrFail(prontuario)
+            return await this.internoRepository.findOneOrFail({prontuario: in_prontuario})
                                 .then((interno) => {
-                                        let falta: any = interno.fecha_cumple.getTime() - (new Date().getTime());
-                                        const lleva: Object = this._getLleva(interno.fecha_cumple, interno.total_anios, interno.total_meses, interno.total_dias);
+                                        //let falta: any = interno.fecha_cumple.getTime() - (new Date().getTime());
+                                        //const lleva: Object = this._getLleva(interno.fecha_cumple, interno.total_anios, interno.total_meses, interno.total_dias);
                                         return{
                                             status: "OK",
-                                            cumple: interno.fecha_cumple.toString(),
-                                            falta,
-                                            lleva
+                                            //cumple: interno.fecha_cumple.toString(),
+                                            cummple: "ya cumple",
+                                            //falta,
+                                            //lleva
                                         };
                                 })
                                 .catch((error) => {

@@ -74,22 +74,47 @@ export class InternoController {
     //----------------------------------
 
     //PETICION HTTP PARA RETORNAR PLANILLA ANTECEDENTES    
-    // @Get('planilla-antecedentes')
-    // async getPlanillaAntecedentes(@Req() req: Request){  
-    //     try {
-    //         if(!req.query.prontuario){
-    //             throw new Error('Debe proporcionar el prontuario');
-    //         }
-    //         const prontuario: number = parseInt(req.query.prontuario.toString());
-    //         return await this.internoService.getPlanillaAntecedentes(prontuario);
+    //@Get('planilla-antecedentes')
+    @Get('planillas')
+    async getPlanillaAntecedentes(@Req() req: Request){  
+        try {
+            if(!req.query.prontuario){
+                throw new Error('Debe proporcionar el prontuario');
+            }
+            const prontuario: number = parseInt(req.query.prontuario.toString());
+            //return await this.internoService.getPlanillaAntecedentes(prontuario);
+            return await this.internoService.planilla(prontuario);
                     
-    //     } catch (error) {
-    //         throw new BadRequestException(error.message);
-    //     }
-    // }
+        } catch (error) {
+            throw new BadRequestException(error.message);
+        }
+    }
     //FIN RETORNAR PLANILLA ANTECEDENTES
     //----------------------------------
 
+    //RETORNAR PLANILLA
+    @Get('planilla')
+    async getPlanilla(@Req() req: Request){
+        //console.log('REQUEST: ', req);
+        try {
+           
+           const prontuario: number = parseInt(req.query.prontuario.toString());
+           console.log("prontuario", prontuario);
+            return await this.internoService.planilla(prontuario)
+                           .then((result) => {
+                               if (result){
+                                   return result;
+                               }
+                               else{
+                                   throw new NotFoundException();
+                                   
+                               }
+                           });
+        } catch (error) {
+            throw new BadRequestException();
+                     
+        }
+    }
 
     //METODO PARA RETORNAR ARCHIVO IMAGEN DEL USUARIO
     @Get('foto')
@@ -225,30 +250,6 @@ export class InternoController {
      //FIN METODO CARGAR IMAGEN
      //------------------------
 
-     //RETORNAR PLANILLA
-     @Get('planilla')
-     async planilla(
-        @Req()
-        req: Request,
-     ){
-         console.log('REQUEST: ', req);
-         try {
-            const pront: number = parseInt(req.query.pront.toString());
-
-             return await this.internoService.planilla(pront)
-                            .then((result) => {
-                                if (result){
-                                    return result;
-                                }
-                                else{
-                                    throw new NotFoundException();
-                                    
-                                }
-                            });
-         } catch (error) {
-            throw new BadRequestException();
-                      
-         }
-     }
+     
 
     }
