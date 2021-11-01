@@ -9,6 +9,7 @@ import { addListener } from 'node:process';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { SSL_OP_TLS_ROLLBACK_BUG } from 'node:constants';
+import * as moment from 'moment';
 
 @Injectable()
 export class InternoService {
@@ -51,13 +52,7 @@ export class InternoService {
                                 .then((interno) => {
                                         //let falta: any = interno.fecha_cumple.getTime() - (new Date().getTime());
                                         //const lleva: Object = this._getLleva(interno.fecha_cumple, interno.total_anios, interno.total_meses, interno.total_dias);
-                                        return{
-                                            status: "OK",
-                                            //cumple: interno.fecha_cumple.toString(),
-                                            cummple: "ya cumple",
-                                            //falta,
-                                            //lleva
-                                        };
+                                        return this._getCalculosPenado(interno);
                                 })
                                 .catch((error) => {
                                     throw new Error(error.message);
@@ -214,6 +209,58 @@ export class InternoService {
                  * calculos
                  */
                 return "";
+    }
+
+    private _getCalculosPenado(interno: Interno): object{
+        try {
+            //calculo tiempo que lleva
+            let fecha_cumple = moment(interno.fecha_cumple);
+            let fecha_detencion = moment(interno.fecha_detencion);
+            let fecha_actual = moment('2021-10-28');
+
+            let dias_aux = fecha_actual.diff(fecha_detencion, 'days');
+        
+            let anios = fecha_cumple.diff(fecha_detencion, 'year');
+            fecha_detencion.add(anios,'years');
+            let meses= fecha_cumple.diff(fecha_detencion, 'months');
+            fecha_detencion.add(meses,'month');
+            let dias =fecha_cumple.diff(fecha_detencion, 'days');
+            
+            
+            let meses2 = Math.trunc(dias_aux / 30);
+            let dias2 = dias_aux % 30;
+            let anios2 = Math.trunc(meses2 / 12);
+            meses2 = meses2 % 12;
+            
+
+            //fin calculo tiempo que lleva
+            return {
+                status: "OK",
+                //cumple: interno.fecha_cumple.toString(),
+                cumnple_1: interno.fecha_cumple,
+                cummple: interno.fecha_cumple,
+                fecha_detencion: interno.fecha_detencion,
+                anios: anios,
+                meses: meses,
+                dias: dias,
+                fecha_hoy: fecha_actual,
+                lleva_dias: dias2,
+                lleva_meses: meses2,
+                lleva_anios: anios2,
+                ingreso: interno.fecha_ingreso,
+                ingreso_2: new Date(interno.fecha_ingreso).toLocaleDateString()
+
+                //falta,
+                //lleva
+            };
+        } catch (error) {
+            throw new Error(error.message);
+        }        
+        /**
+                 * 
+                 * calculos
+                 */
+                //return "";
     }
 
 

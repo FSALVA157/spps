@@ -96,8 +96,7 @@ export class InternoController {
     @Get('planilla')
     async getPlanilla(@Req() req: Request){
         //console.log('REQUEST: ', req);
-        try {
-           
+        try {           
            const prontuario: number = parseInt(req.query.prontuario.toString());
            console.log("prontuario", prontuario);
             return await this.internoService.planilla(prontuario)
@@ -111,8 +110,7 @@ export class InternoController {
                                }
                            });
         } catch (error) {
-            throw new BadRequestException();
-                     
+            throw new BadRequestException(error.message);                     
         }
     }
 
