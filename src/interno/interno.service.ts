@@ -215,16 +215,19 @@ export class InternoService {
         try {
             //calculo tiempo que lleva
             let fecha_cumple = moment(interno.fecha_cumple);
+            
             let fecha_detencion = moment(interno.fecha_detencion);
+            //let fecha_actual = moment('2021-10-28');
             let fecha_actual = moment('2021-10-28');
+
 
             let dias_aux = fecha_actual.diff(fecha_detencion, 'days');
         
-            let anios = fecha_cumple.diff(fecha_detencion, 'year');
+            let anios = fecha_actual.diff(fecha_detencion, 'year');
             fecha_detencion.add(anios,'years');
-            let meses= fecha_cumple.diff(fecha_detencion, 'months');
+            let meses= fecha_actual.diff(fecha_detencion, 'months');
             fecha_detencion.add(meses,'month');
-            let dias =fecha_cumple.diff(fecha_detencion, 'days');
+            let dias =fecha_actual.diff(fecha_detencion, 'days');
             
             
             let meses2 = Math.trunc(dias_aux / 30);
@@ -244,6 +247,7 @@ export class InternoService {
                 meses: meses,
                 dias: dias,
                 fecha_hoy: fecha_actual,
+                dias_total: dias_aux,
                 lleva_dias: dias2,
                 lleva_meses: meses2,
                 lleva_anios: anios2,
