@@ -98,7 +98,6 @@ export class InternoController {
         //console.log('REQUEST: ', req);
         try {           
            const prontuario: number = parseInt(req.query.prontuario.toString());
-           console.log("prontuario", prontuario);
             return await this.internoService.planilla(prontuario)
                            .then((result) => {
                                if (result){

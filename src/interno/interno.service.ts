@@ -217,36 +217,48 @@ export class InternoService {
             let fecha_cumple = moment(interno.fecha_cumple);            
             let fecha_detencion = moment(interno.fecha_detencion);
 
-            let fecha_actual = new Date('2021-10-28');
-            //let fecha_actual = moment('2021-10-28');
-            
-
-            let lleva= Object(this.getDifEntreFechas(fecha_actual,interno.fecha_detencion));
-            let falta= Object(this.getDifEntreFechas(interno.fecha_cumple,fecha_actual));
-            console.log(lleva);
+            //let fecha_actual_aux: Date = new Date('2021-10-28');
+            //let fecha_actual = fecha_actual_aux.getFullYear() +"-" + ((fecha_actual_aux.getMonth())+1)+"-"+ ((fecha_actual_aux.getDate())+1);
+            let fecha_actual_aux = moment('2021-10-28');
+            let fecha_actual = fecha_actual_aux.format("YYYY-MM-DD");
+            let lleva= Object(this.getDifEntreFechas(fecha_actual,interno.fecha_detencion.toString()));
+            let falta= Object(this.getDifEntreFechas(interno.fecha_cumple.toString(),fecha_actual));
             //fin calculo tiempo que lleva
             return {
                 status: "OK",
-                cummple: interno.fecha_cumple,
-
-                //fecha_detencion_antes: fecha_detencion_antes,
                 fecha_hoy: fecha_actual,
+                estado_procesal: interno.estado_procesal.estado_procesal,
+                nombre_completo: interno.apellido_1 + " " +interno.apellido_2 + " " + interno.nombre_1 + " " + interno.nombre_2 + " " + interno.nombre_3,
+                nacionalidad: interno.nacionalidad.nacionalidad,
+                fecha_nacimiento: interno.fecha_nacimiento,
+                lugar_nacimiento: interno.lugar_nacimiento,
+                dni: interno.dni,
+                prontuario_policial: interno.prontuario_policial,
                 fecha_detencion: interno.fecha_detencion,
+                fecha_ingreso: interno.fecha_ingreso,
+                procedente: interno.establecimiento_procedencia.establecimiento_procedencia,
+                num_expediente: interno.expediente_numero,
+                causa: interno.causa_penal,
+                tribunal_condena: interno.condena_juzgado.juzgado,
+                anios_condena: interno.total_anios,
+                meses_condena: interno.total_meses,
+                dias_condena: interno.total_dias,
+                
+                
+                //tiempo que lleva
                 anios_lleva: lleva['anios'],
                 meses_lleva: lleva['meses'],
                 dias_lleva: lleva['dias'],
-                anio_falta: falta['anios'],
+
+                //tiempo que falta
+                anios_falta: falta['anios'],
                 meses_falta: falta['meses'],
-                dias_falta: falta['dias']
+                dias_falta: falta['dias'],
 
-
-                // fecha_hoy: fecha_actual,
-                // dias_total: dias_aux,
-                // lleva_dias: dias2,
-                // lleva_meses: meses2,
-                // lleva_anios: anios2,
-                // ingreso: interno.fecha_ingreso,
-                // ingreso_2: new Date(interno.fecha_ingreso).toLocaleDateString()
+                fecha_cumple: interno.fecha_cumple,
+                tipificacion_pena: interno.reincidencia.reincidencia
+                
+                
 
             };
         } catch (error) {
@@ -259,22 +271,17 @@ export class InternoService {
                 //return "";
     }
 
-    private getDifEntreFechas(fecha_mayor: Date, fecha_menor: Date): object{
+    private getDifEntreFechas(fecha_mayor: string, fecha_menor: string): object{
         
         let anios: number;
         let meses: number;
         let dias: number;
-        let fecha_mayor2 = moment(fecha_mayor);
-        console.log("fecha mayor",fecha_mayor);
-        console.log("fecha mayor2",fecha_mayor2);
+        let fecha_mayor2 = moment(fecha_mayor);       
         let fecha_menor2 = moment(fecha_menor);
 
         anios = fecha_mayor2.diff(fecha_menor2, 'year');
         fecha_menor2.add(anios,'years');        
-        meses= fecha_mayor2.diff(fecha_menor2, 'months');
-        console.log("fecha mayor",fecha_mayor);
-        console.log("fecha menor sumada",fecha_menor2.add(meses,'month'));
-        
+        meses= fecha_mayor2.diff(fecha_menor2, 'months');        
         dias =fecha_mayor2.diff(fecha_menor2, 'days');
 
         return {
@@ -284,7 +291,7 @@ export class InternoService {
         }
     }
 
-    private getDifEntreFechas2(fecha_mayor: Date, fecha_menor: Date): object{
+    private getDifEntreFechas2(fecha_mayor: string, fecha_menor: Date): object{
         
         let anios: number;
         let meses: number;
