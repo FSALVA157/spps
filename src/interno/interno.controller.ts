@@ -75,20 +75,20 @@ export class InternoController {
 
     //PETICION HTTP PARA RETORNAR PLANILLA ANTECEDENTES    
     //@Get('planilla-antecedentes')
-    @Get('planillas')
-    async getPlanillaAntecedentes(@Req() req: Request){  
-        try {
-            if(!req.query.prontuario){
-                throw new Error('Debe proporcionar el prontuario');
-            }
-            const prontuario: number = parseInt(req.query.prontuario.toString());
-            //return await this.internoService.getPlanillaAntecedentes(prontuario);
-            return await this.internoService.planilla(prontuario);
+    // @Get('planillas')
+    // async getPlanillaAntecedentes(@Req() req: Request){  
+    //     try {
+    //         if(!req.query.prontuario){
+    //             throw new Error('Debe proporcionar el prontuario');
+    //         }
+    //         const prontuario: number = parseInt(req.query.prontuario.toString());
+    //         //return await this.internoService.getPlanillaAntecedentes(prontuario);
+    //         return await this.internoService.planilla(prontuario);
                     
-        } catch (error) {
-            throw new BadRequestException(error.message);
-        }
-    }
+    //     } catch (error) {
+    //         throw new BadRequestException(error.message);
+    //     }
+    // }
     //FIN RETORNAR PLANILLA ANTECEDENTES
     //----------------------------------
 
@@ -112,6 +112,28 @@ export class InternoController {
             throw new BadRequestException(error.message);                     
         }
     }
+
+    //RETORNAR INTERNO X PRONTUARIO
+    @Get('interno')
+    async getInterno(@Req() req: Request){
+        //console.log('REQUEST: ', req);
+        try {           
+           const prontuario: number = parseInt(req.query.prontuario.toString());
+            return await this.internoService.getInternoXProntuario(prontuario)
+                           .then((result) => {
+                               if (result){
+                                   return result;
+                               }
+                               else{
+                                   throw new NotFoundException();
+                                   
+                               }
+                           });
+        } catch (error) {
+            throw new BadRequestException(error.message);                     
+        }
+    }
+    //FIN RETORNAR INTERNO X PRONTUARIO....................................
 
     //METODO PARA RETORNAR ARCHIVO IMAGEN DEL USUARIO
     @Get('foto')

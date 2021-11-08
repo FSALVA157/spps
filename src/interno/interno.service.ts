@@ -28,6 +28,16 @@ export class InternoService {
     }
     //----------------------------------
 
+    /**
+     * Servicio que retorna un registro de la tabla INTERNO según ID
+     * @param id 
+     * @returns 
+     */
+     async getInternoXProntuario(inprontuario:number){
+        return await this.internoRepository.findOneOrFail({prontuario: inprontuario});
+    }
+    //----------------------------------
+
     
     /**
      * Servicio que retorna un registro de la tabla INTERNO según ID
@@ -226,6 +236,7 @@ export class InternoService {
             //fin calculo tiempo que lleva
             return {
                 status: "OK",
+                prontuario: interno.prontuario,
                 fecha_hoy: fecha_actual,
                 estado_procesal: interno.estado_procesal.estado_procesal,
                 nombre_completo: interno.apellido_1 + " " +interno.apellido_2 + " " + interno.nombre_1 + " " + interno.nombre_2 + " " + interno.nombre_3,
