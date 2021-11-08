@@ -302,7 +302,7 @@ export class InternoService {
         }
     }
 
-    private getDifEntreFechas2(fecha_mayor: string, fecha_menor: Date): object{
+    private getDifEntreFechas2(fecha_mayor: string, fecha_menor: string): object{
         
         let anios: number;
         let meses: number;
@@ -310,14 +310,12 @@ export class InternoService {
         let fecha_mayor2 = moment(fecha_mayor);
         let fecha_menor2 = moment(fecha_menor);
 
-        let dias_aux = fecha_mayor2.diff(fecha_menor2, 'days');      
-                     
+        let dias_aux = fecha_mayor2.diff(fecha_menor2, 'days');                          
             
         meses = Math.trunc(dias_aux / 30);
         dias = dias_aux % 30;
         anios = Math.trunc(meses / 12);
         meses = meses % 12;
-
 
         return {
             anios,

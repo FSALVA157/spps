@@ -101,6 +101,7 @@ export class InternoController {
             return await this.internoService.planilla(prontuario)
                            .then((result) => {
                                if (result){
+                                   
                                    return result;
                                }
                                else{
