@@ -49,8 +49,8 @@ export class InternoService {
     }
     //----------------------------------
 
-    async editOne(id: number, data: EditInternoDto){
-        const respuesta = await this.internoRepository.update(id,data);
+    async editOne(inprontuario: number, data: EditInternoDto){
+        const respuesta = await this.internoRepository.update({prontuario: inprontuario},data);
         if((await respuesta).affected == 0) throw new NotFoundException("No existe el registro de Interno que intenta modificar");
         return respuesta;
     }
@@ -292,7 +292,8 @@ export class InternoService {
 
         anios = fecha_mayor2.diff(fecha_menor2, 'year');
         fecha_menor2.add(anios,'years');        
-        meses= fecha_mayor2.diff(fecha_menor2, 'months');        
+        meses= fecha_mayor2.diff(fecha_menor2, 'months');   
+        fecha_menor2.add(meses,"month");     
         dias =fecha_mayor2.diff(fecha_menor2, 'days');
 
         return {

@@ -198,14 +198,14 @@ export class InternoController {
      * @param data 
      * @returns 
      */
-    @Put(':id')
+    @Put(':prontuario')
     async editOne(
-        @Param('id',ParseIntPipe)
-        id: number,
+        @Param('prontuario',ParseIntPipe)
+        prontuario: number,
         @Body()
         data: EditInternoDto
     ){
-        return await this.internoService.editOne(id, data);
+        return await this.internoService.editOne(prontuario, data);
     }
     //FIN Petición http que edita un registro según id
     //----------------------------------
