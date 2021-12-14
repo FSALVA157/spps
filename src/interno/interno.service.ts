@@ -29,7 +29,7 @@ export class InternoService {
     //----------------------------------
 
     /**
-     * Servicio que retorna un registro de la tabla INTERNO según ID
+     * Servicio que retorna un registro de la tabla INTERNO según ID 
      * @param id 
      * @returns 
      */
