@@ -165,8 +165,10 @@ export class InternoService {
 
     //GUARDAR FOTO EN BASE DE DATOS
     //guarda el nombre de la foto en el campo foto del interno
-    async cargarFoto(foto_url: string, id: number){
-        const interno = await this.internoRepository.findOne({id_interno: id});
+    async cargarFoto(foto_url: string, prontuario: number){
+        console.log("url_foto", foto_url);
+        console.log("prntuario", prontuario);
+        const interno = await this.internoRepository.findOne({prontuario: prontuario});
         if(!interno){
             throw new NotFoundException('No existe el interno al que intenta asignar la imagen');
            return; 
@@ -186,7 +188,7 @@ export class InternoService {
             "foto_frente": foto_url
         };
         
-        const resultado = await this.internoRepository.update(id, data);
+        const resultado = await this.internoRepository.update({prontuario:prontuario}, data);
         if(resultado.affected == 0) throw new NotFoundException('No se ha actualizado el campo de imagen');
         return resultado;
     }

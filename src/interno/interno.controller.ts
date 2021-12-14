@@ -254,13 +254,14 @@ export class InternoController {
          req: Request,    
      ){
          try {
-             if(req.query.id === null || foto === null){
+             if(req.query.prontuario === null || foto === null){
                      throw new Error;
              }
-             const id: number = parseInt(req.query.id.toString());
+             const prontuario: number = parseInt(req.query.prontuario.toString());
              
              console.log(foto);
-             return await this.internoService.cargarFoto(foto.filename, id);
+             console.log("PRONTUARIO",prontuario);
+             return await this.internoService.cargarFoto(foto.filename, prontuario);
              
          } catch (error) {
  
