@@ -38,6 +38,7 @@ import { AuthModule } from './auth/auth.module';
 import { PlanillaAntecedentesModule } from './planilla-antecedentes/planilla-antecedentes.module';
 import { MarcaCorporalModule } from './marca-corporal/marca-corporal.module';
 import { LocalidadModule } from './localidad/localidad.module';
+import { VisitaModule } from './visita/visita.module';
 
 
 
@@ -48,6 +49,7 @@ import { LocalidadModule } from './localidad/localidad.module';
       useFactory: (config: ConfigService) => ({
         type: 'mysql',
         //host: config.get<string>(DATABASE_HOST),
+        
         host: "b0vnpyobuzc5d4agzfrf-mysql.services.clever-cloud.com",
         //port: parseInt(config.get<string>(DATABASE_PORT),10),
         port: 3306,
@@ -99,7 +101,8 @@ import { LocalidadModule } from './localidad/localidad.module';
     AuthModule,
     PlanillaAntecedentesModule,
     MarcaCorporalModule,
-    LocalidadModule
+    LocalidadModule,
+    VisitaModule
   ],
   controllers: [AppController],
   providers: [AppService],
