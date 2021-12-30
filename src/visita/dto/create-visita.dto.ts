@@ -1,1 +1,4 @@
-export class CreateVisitaDto {}
+
+export class CreateVisitaDto {
+    
+}

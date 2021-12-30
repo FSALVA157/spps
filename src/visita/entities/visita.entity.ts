@@ -1,12 +1,12 @@
 
-import { IsOptional } from "class-validator";
+import { IsEnum, isEnum, IsOptional } from "class-validator";
 import { Departamento } from "src/departamento/entities/departamento.entity";
 import { EstadoCivil } from "src/estado-civil/entities/estado-civil.entity";
 import { Nacionalidad } from "src/nacionalidad/entities/nacionalidad.entity";
 import { Provincia } from "src/provincia/entities/provincia.entity";
 import { Sexo } from "src/sexo/entities/sexo.entity";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { VisitaCategoria } from "../enums/visita_enums";
+import { VisitaCabelloColor, VisitaCategoria, VisitaOjosColor, VisitaPiel } from "../enums/visita_enums";
 
 
 
@@ -34,6 +34,7 @@ export class Visita {
         length: 20,
         nullable: false
     })
+    @IsOptional()    
     apellido_2: string;
 
     @Column({
@@ -46,8 +47,9 @@ export class Visita {
     @Column({
         type: "varchar",
         length: 20,
-        nullable: false
+        nullable: true
     })
+    @IsOptional()
     nombre_2: string;
 
     @Column({
@@ -55,6 +57,7 @@ export class Visita {
         length: 20,
         nullable: false
     })
+    @IsOptional()
     nombre_3: string;
 
     @Column({
@@ -75,6 +78,7 @@ export class Visita {
         type: "int",
         nullable: false
     })
+    @IsOptional()
     estado_civil_id: number;    
 
     @ManyToOne(type => EstadoCivil, {eager: true})
@@ -88,12 +92,14 @@ export class Visita {
         type: "varchar",
         length: 50
           })
+    @IsOptional()
     telefono: string;
 
     @Column({
         type: "varchar",
         length: 100,
             })
+    @IsOptional()
     domicilio: string;
 
     @Column({
@@ -142,6 +148,7 @@ export class Visita {
         type: "date",
         nullable: true
     })
+    @IsOptional()
     fecha_nacimiento: Date;  
 
     @Column({
@@ -149,6 +156,7 @@ export class Visita {
         enum: VisitaCategoria,
         nullable: false       
     })
+    @IsOptional()
     categoria: VisitaCategoria;
 
     @Column({
@@ -156,6 +164,7 @@ export class Visita {
         length: 500,
         nullable: true
     })
+    @IsOptional()
     padre: string;
 
     @Column({
@@ -163,6 +172,7 @@ export class Visita {
         nullable: true,
         unique: true
     })
+    @IsOptional()
     padre_dni: number;
 
     @Column({
@@ -170,6 +180,7 @@ export class Visita {
         length: 500,
         nullable: true
     })
+    @IsOptional()
     madre: string;
 
     @Column({
@@ -177,6 +188,7 @@ export class Visita {
         nullable: true,
         unique: true
     })
+    @IsOptional()
     madre_dni: number;
 
     @Column({
@@ -184,6 +196,7 @@ export class Visita {
         length: 500,
         nullable: true
     })
+    @IsOptional()
     tutor1: string;
 
     @Column({
@@ -191,6 +204,7 @@ export class Visita {
         nullable: true,
         unique: true
     })
+    @IsOptional()
     tutor1_dni: number;
 
     @Column({
@@ -198,6 +212,7 @@ export class Visita {
         length: 500,
         nullable: true
     })
+    @IsOptional()
     tutor2: string;
 
     @Column({
@@ -205,11 +220,13 @@ export class Visita {
         nullable: true,
         unique: true
     })
+    @IsOptional()
     tutor2_dni: number;
 
     @Column({
         default: false,        
     })
+    @IsOptional()
     hijos_tiene: boolean;
 
     @Column({
@@ -226,11 +243,38 @@ export class Visita {
         default: 0,
         nullable: true
     })
+    @IsOptional()
     altura: string;
+
+    @Column({
+         type: "enum",
+          enum: VisitaPiel,
+          nullable: true
+    })
+    @IsOptional()
+    piel: VisitaPiel;
+
+    @Column({
+        type: "enum",
+         enum: VisitaOjosColor,
+         nullable: true
+   })
+   @IsOptional()
+   ojos_color: VisitaOjosColor;
+
+   @Column({
+    type: "enum",
+     enum: VisitaCabelloColor,
+     nullable: true
+    })
+    @IsOptional()
+    cabello_color: VisitaCabelloColor;
+   
 
     @Column({
         default: false,        
     })
+    @IsOptional()
     prohibida: boolean;
 
     @Column({
@@ -238,12 +282,14 @@ export class Visita {
         length: 50,
         nullable: true
     })
+    @IsOptional()
     prohibicion_disposicion: string;
 
     @Column({
         type: 'varchar',
         nullable: true
     })
+    @IsOptional()
     prohibicion_historial: string;
 
     @Column({
@@ -333,6 +379,7 @@ export class Visita {
         type: 'int',
         nullable: true
     })
+    @IsOptional()
     dias: number;
 
     @Column({
