@@ -1,11 +1,11 @@
 
-import { IsEnum, isEnum, IsOptional } from "class-validator";
+import { IsEmail, IsEnum, isEnum, IsOptional } from "class-validator";
 import { Departamento } from "src/departamento/entities/departamento.entity";
 import { EstadoCivil } from "src/estado-civil/entities/estado-civil.entity";
 import { Nacionalidad } from "src/nacionalidad/entities/nacionalidad.entity";
 import { Provincia } from "src/provincia/entities/provincia.entity";
 import { Sexo } from "src/sexo/entities/sexo.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { VisitaCabelloColor, VisitaCategoria, VisitaOjosColor, VisitaPiel } from "../enums/visita_enums";
 
 
@@ -94,6 +94,14 @@ export class Visita {
           })
     @IsOptional()
     telefono: string;
+
+    @Column({
+        type: "varchar",
+        length: 50,
+        unique: true
+          })
+    @IsOptional()
+    email: string;
 
     @Column({
         type: "varchar",
@@ -388,5 +396,13 @@ export class Visita {
     @IsOptional()
     restriccion: boolean;
 
+    @CreateDateColumn()
+    fecha_alta: Date;
+
+    @UpdateDateColumn()
+    ultima_actualizacion: Date;
+
+    @DeleteDateColumn()
+    fecha_baja: Date;
 
 }

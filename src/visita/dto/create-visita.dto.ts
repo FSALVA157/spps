@@ -1,4 +1,4 @@
-import { IsBoolean, IsDateString, IsEnum, IsNumber, IsOptional, IsString, Length } from "class-validator";
+import { IsBoolean, IsDateString, IsEnum, IsNumber, IsOptional, IsString, Length, Matches } from "class-validator";
 import { VisitaCabelloColor, VisitaCategoria, VisitaOjosColor, VisitaPiel } from "../enums/visita_enums";
 
 export class CreateVisitaDto {
@@ -40,6 +40,11 @@ export class CreateVisitaDto {
     @Length(7, 20,{message: 'El telefóno es un texto de $constraint1 a $constraint2 caracteres'})
     @IsOptional()
     telefono: string;
+
+    @IsString()
+    @Matches(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/,{message:'El email no es correcto'})
+    @Length(4,50,{message:'El email debe tener entre $constraint1 y $constraint2 caracteres en este momento tu texto tiene una longitud de $value letras'})
+    email: string;
 
     @IsString()
     @Length(7, 20,{message: 'El telefóno es un texto de $constraint1 a $constraint2 caracteres'})
@@ -192,6 +197,4 @@ export class CreateVisitaDto {
     @IsBoolean()
     @IsOptional()
     restriccion: boolean;
-
-
 }
